@@ -14,10 +14,10 @@ class CLI : public QMainWindow
 public:
     explicit CLI(QWidget *parent = 0);
     ~CLI();
-
+public: void keyPressEvent(QKeyEvent  *event);
 private slots:
     void receiveShow();
-
+    void on_lineEdit_returnPressed();
 private:
     Ui::CLI *ui;
 };

@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
     MainWindow w;
     GUI g;
     CLI c;
-    w.show();
+    c.setWindowTitle("Leeeeo@LeeeeoLius-MacBook-Pro:~/Code/BVFS");
+//    w.show();
+    c.show();
     QObject::connect(&w,SIGNAL(showGUI()),&g,SLOT(receiveShow()));
     QObject::connect(&w,SIGNAL(showCLI()),&c,SLOT(receiveShow()));
 //    run();
