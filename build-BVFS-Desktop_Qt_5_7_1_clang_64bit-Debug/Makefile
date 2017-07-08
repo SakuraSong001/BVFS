@@ -168,6 +168,7 @@ DIST          = ../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.7/clang_64/mkspecs/features/spec_post.prf \
+		../BVFS/.qmake.stash \
 		../../Qt/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/toolchain.prf \
@@ -193,7 +194,17 @@ DIST          = ../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/exceptions.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/lex.prf \
-		../BVFS/BVFS.pro ../BVFS/mainwindow.h ../BVFS/main.cpp \
+		../BVFS/BVFS.pro ../BVFS/mainwindow.h \
+		../BVFS/directory.h \
+		../BVFS/file.h \
+		../BVFS/filesystem.h \
+		../BVFS/format.h \
+		../BVFS/freeblocklink.h \
+		../BVFS/help.h \
+		../BVFS/login.h \
+		../BVFS/register.h \
+		../BVFS/run.h \
+		../BVFS/stacki.h ../BVFS/main.cpp \
 		../BVFS/mainwindow.cpp
 QMAKE_TARGET  = BVFS
 DESTDIR       = 
@@ -322,6 +333,7 @@ Makefile: ../BVFS/BVFS.pro ../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf .
 		../../Qt/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.7/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/toolchain.prf \
@@ -467,6 +479,7 @@ Makefile: ../BVFS/BVFS.pro ../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf .
 ../../Qt/5.7/clang_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../Qt/5.7/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.7/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.7/clang_64/mkspecs/features/mac/sdk.prf:
 ../../Qt/5.7/clang_64/mkspecs/features/toolchain.prf:
@@ -525,7 +538,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../BVFS/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/main.cpp ../BVFS/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/mainwindow.ui $(DISTDIR)/
 
@@ -537,6 +550,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r BVFS.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -586,7 +600,17 @@ main.o: ../BVFS/main.cpp ../BVFS/mainwindow.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../BVFS/run.h \
+		../BVFS/filesystem.h \
+		../BVFS/file.h \
+		../BVFS/login.h \
+		../BVFS/format.h \
+		../BVFS/stacki.h \
+		../BVFS/freeblocklink.h \
+		../BVFS/directory.h \
+		../BVFS/register.h \
+		../BVFS/help.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../BVFS/main.cpp
 
 mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \

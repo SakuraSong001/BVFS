@@ -24,12 +24,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    loginwindow.cpp \
-    FS.cpp
+        mainwindow.cpp
 
 HEADERS  += mainwindow.h \
-    loginwindow.h \
     directory.h \
     file.h \
     filesystem.h \
@@ -41,5 +38,4 @@ HEADERS  += mainwindow.h \
     run.h \
     stacki.h
 
-FORMS    += mainwindow.ui \
-    loginwindow.ui
+FORMS    += mainwindow.ui
