@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     gui.cpp \
-    cli.cpp
+    cli.cpp \
+    ini.cpp
 
 HEADERS  += mainwindow.h \
     directory.h \
@@ -40,8 +41,10 @@ HEADERS  += mainwindow.h \
     run.h \
     stacki.h \
     gui.h \
-    cli.h
+    cli.h \
+    ini.h
 
 FORMS    += mainwindow.ui \
     gui.ui \
-    cli.ui
+    cli.ui \
+    ini.ui
