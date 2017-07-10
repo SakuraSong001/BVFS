@@ -1,7 +1,10 @@
 #ifndef INI_H
 #define INI_H
 
+
+
 #include <QMainWindow>
+#include "mainwindow.h"
 
 namespace Ui {
 class iNI;
@@ -15,6 +18,12 @@ public:
     explicit iNI(QWidget *parent = 0);
     ~iNI();
 
+
+private slots:
+    void on_refresh_clicked();
+    void receiveInodeData(INode*,MainFileDirectory);
+signals:
+    void sendGetInodeDataInfo(bool);
 private:
     Ui::iNI *ui;
 };

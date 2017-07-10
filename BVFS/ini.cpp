@@ -1,6 +1,7 @@
 #include "ini.h"
 #include "ui_ini.h"
 
+bool flag=false;
 iNI::iNI(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::iNI)
@@ -26,4 +27,60 @@ iNI::iNI(QWidget *parent) :
 iNI::~iNI()
 {
     delete ui;
+}
+
+void iNI::on_refresh_clicked()
+{
+    flag=true;
+    emit sendGetInodeDataInfo(flag);
+
+
+}
+void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint)
+{
+
+    for(int i=0;i<INODENUM;i++)
+    {
+     ui->tableWidget->removeRow(i);
+    }
+    for (int i = 0; i<INODENUM; i++)
+    {
+       int row=ui->tableWidget->rowCount();
+       ui->tableWidget->setRowCount(row+1);
+       ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString::number(inodePoint[i].id)));
+       ui->tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(inodePoint[i].fileCount)));
+       ui->tableWidget->setItem(i,2,new QTableWidgetItem(QString::number(inodePoint[i].fileMode)));
+       ui->tableWidget->setItem(i,3,new QTableWidgetItem(QString::number(inodePoint[i].userId)));
+        for (int j = 0; j < DISKADDRESSNUM; j++)
+        {
+
+            ui->tableWidget->setItem(i,4,new QTableWidgetItem(QString::number(inodePoint[i].diskAddress[0])+" "
+                                     +QString::number(inodePoint[i].diskAddress[1])+" "
+                                     +QString::number(inodePoint[i].diskAddress[2])+" "
+                                     +QString::number(inodePoint[i].diskAddress[3])+" "
+                                     +QString::number(inodePoint[i].diskAddress[5])+" "
+                                     +QString::number(inodePoint[i].diskAddress[6])+" "
+                                     +QString::number(inodePoint[i].diskAddress[7])+" "
+                                     +QString::number(inodePoint[i].diskAddress[8])+" "
+                                     +QString::number(inodePoint[i].diskAddress[9])));
+        }
+    }
+
+    for(int i=0;i<mfdPoint.sz;i++)
+    {
+      ui->tableWidget_2->removeRow(i);
+    }
+    for (int i = 0; i <mfdPoint.sz; i++)//mfd
+    {
+        if(mfdPoint.item[i].iNode!=-1)
+        {
+          int row=ui->tableWidget_2->rowCount();
+          ui->tableWidget_2->setRowCount(row+1);
+          ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(mfdPoint.item[i].name));
+          ui->tableWidget_2->setItem(i,1,new QTableWidgetItem(mfdPoint.item[i].psw));
+          ui->tableWidget_2->setItem(i,2,new QTableWidgetItem(QString::number( mfdPoint.item[i].iNode)));
+        }
+        else
+            break;
+    }
 }

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     CLI c;
     iNI i;
     i.setWindowTitle("iNode Structure Table");
-//    i.show();
+    i.show();
     c.setWindowTitle("Leeeeo@LeeeeoLius-MacBook-Pro:~/Code/BVFS");
     w.show();
 //    c.show();
@@ -24,6 +24,9 @@ int main(int argc, char *argv[])
     QObject::connect(&w,SIGNAL(showCLI()),&c,SLOT(receiveShow()));
     QObject::connect(&c,SIGNAL(sendLoginInfo(QString,QString)),&w,SLOT(receiveLoginInfo(QString,QString)));
     QObject::connect(&w,SIGNAL(sendLoginStatus(bool)),&c,SLOT(receiveLoginStatus(bool)));
+
+    QObject::connect(&w,SIGNAL(sendInodeToIni(INode*,MainFileDirectory)),&i,SLOT(receiveInodeData(INode*,MainFileDirectory)));
+    QObject::connect(&i,SIGNAL(sendGetInodeDataInfo(bool)),&w,SLOT(receiveSetInodeInfo(bool)));
 //    title();
 
 //    run();
