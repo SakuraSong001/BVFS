@@ -2,14 +2,17 @@
 #include "ui_cli.h"
 #include <iostream>
 #include <QKeyEvent>
+#include "main.h"
 #include <QTime>
 using namespace std;
 //QString cliHistory;
 int tabCount=1;
-QString user;
+QString userCurrent=NULL;
+QString pswCurrent=NULL;
 QString route;
 QString cmdTime;
 QString front;
+bool userStatus=false;
 int tabIndex=0;
 
 CLI::CLI(QWidget *parent) :
@@ -20,11 +23,11 @@ CLI::CLI(QWidget *parent) :
     palette.setColor(QPalette::Background, Qt::lightGray);
     this->setPalette(palette);
 //    cliHistory="# Leeeeo @ LeeeeoLius-MacBook-Pro in ~/Code/BVFS on git:master x [14:30:01]\n$";
-
     ui->setupUi(this);
 //    ui->textEdit->append(cliHistory);
 //    ui->plainTextEdit->appendHtml(cliHistory+"");
     ui->textEdit->moveCursor(QTextCursor::End);
+    ui->textEdit->append("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
 }
 
 CLI::~CLI()
@@ -40,12 +43,32 @@ void CLI::receiveShow()
 
 void CLI::on_lineEdit_returnPressed()
 {
-    cmdTime=QTime::currentTime().toString("hh:mm:ss");
-    ui->textEdit->append(ui->lineEdit->text());
-    this->setWindowTitle(user+"@LeeeeoLius-MacBook-Pro:"+route);
-    front="# "+user+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
-    ui->lineEdit->setText(front);
-    cout<<"enter pressed"<<endl;
+    if(userCurrent.count()==0)
+    {
+
+        userCurrent=ui->lineEdit->text();
+        ui->textEdit->append(userCurrent+"'s Password:");
+        ui->lineEdit->clear();
+    }
+    else if(userCurrent.count()!=0&&pswCurrent.count()==0)
+    {
+        pswCurrent=ui->lineEdit->text();
+        emit sendLoginInfo(userCurrent,pswCurrent);
+//        send(userCurrent.toStdString(),pswCurrent.toStdString());
+//        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+//        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+//        ui->lineEdit->setText(front);
+    }else if(userStatus){
+        QString order=ui->lineEdit->text();
+        ui->textEdit->append(order.section('$',1,1));
+        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+        ui->textEdit->append(ui->lineEdit->text());
+        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+        ui->lineEdit->setText(front);
+        cout<<"enter pressed"<<endl;
+    }
 }
 
 void CLI::keyPressEvent(QKeyEvent  *event)
@@ -94,4 +117,26 @@ void CLI::keyPressEvent(QKeyEvent  *event)
      {
          ui->tabWidget->setCurrentIndex(4);
      }
+}
+
+void CLI::receiveLoginStatus(bool status)
+{
+    userStatus=status;
+    if(status)
+    {
+        ui->textEdit->append(userCurrent+" login sucessfully!");
+//        ui->textEdit->append("\n");
+        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        ui->textEdit->append(ui->lineEdit->text());
+        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+        ui->lineEdit->setText(front);
+    }else
+    {
+        ui->textEdit->append("\nWrong Password!Please try again!\n");
+        userCurrent.clear();
+        pswCurrent.clear();
+        ui->textEdit->append("login:");
+        ui->lineEdit->clear();
+    }
 }

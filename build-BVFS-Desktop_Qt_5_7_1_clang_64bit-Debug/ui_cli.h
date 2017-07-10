@@ -85,7 +85,7 @@ public:
     {
         CLI->setWindowTitle(QApplication::translate("CLI", "MainWindow", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("CLI", "Tab 1", Q_NULLPTR));
-        lineEdit->setText(QApplication::translate("CLI", "# Leeeeo @ LeeeeoLius-MacBook-Pro in ~/Code/BVFS on git:master x [14:30:01]$", Q_NULLPTR));
+        lineEdit->setText(QString());
     } // retranslateUi
 
 };

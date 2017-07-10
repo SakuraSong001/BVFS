@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gui.h"
+#include "run.h"
 #include <iostream>
+#include <QMessageBox>
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -9,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    init();
 }
 
 MainWindow::~MainWindow()
@@ -31,4 +34,28 @@ void MainWindow::on_commandLinkButton_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     this->close();
+}
+
+void MainWindow::receiveLoginInfo(QString name, QString psw)
+{
+    if(login(name.toStdString(),psw.toStdString()))
+    {
+        emit sendLoginStatus(true);
+        string order;
+        string pwd_tmp = "/root/";
+        cout<<loginUser.username<<"@";
+        string pwd="";
+        vector<string>::iterator it;
+        for(it = PWD.begin();it!=PWD.end();it++) {
+            pwd+="/";
+            pwd+=*it;
+//            cout<<"/"<<*it;
+        }
+        cout<<pwd<<endl;
+        //cout<<"$ ";
+    }else{
+        emit sendLoginStatus(false);
+    }
+//    QMessageBox::information(this, QString::fromLocal8Bit("警告"),psw);
+
 }

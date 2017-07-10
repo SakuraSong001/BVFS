@@ -1,3 +1,5 @@
+#ifndef RUN_H
+#define RUN_H
 #pragma once
 #include <stdio.h>
 #include <string>
@@ -34,7 +36,7 @@ void run() {
 
     title();
 	init();
-	login();
+//	login();
 	string order;
     string pwd_tmp = "/root/";
     cout<<loginUser.username<<"@";
@@ -92,10 +94,11 @@ void run() {
             if(loginUser.username != "/") {
                 cout<<"error: you has logined!"<<endl;
             } else {
-                login();
+//                login();
             }
         } else if(order == "logout") {
-            logout();
+            strcpy(loginUser.username,"/");
+            run();
         } else if(order == "ls") {
             ls();
         } else if(order.find("mkdir") == 0) {
@@ -231,3 +234,4 @@ void run() {
         cout<<"$ ";
 	}
 }
+#endif

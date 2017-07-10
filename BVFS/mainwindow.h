@@ -21,11 +21,12 @@ private slots:
     void on_commandLinkButton_clicked();
 
     void on_pushButton_clicked();
+    void receiveLoginInfo(QString,QString);
 
 signals:
     void showGUI();
     void showCLI();
-
+    void sendLoginStatus(bool);
 private:
     Ui::MainWindow *ui;
 };

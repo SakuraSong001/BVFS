@@ -2,6 +2,7 @@
 #define CLI_H
 
 #include <QMainWindow>
+//#include "login.h"
 
 namespace Ui {
 class CLI;
@@ -18,6 +19,9 @@ public: void keyPressEvent(QKeyEvent  *event);
 private slots:
     void receiveShow();
     void on_lineEdit_returnPressed();
+    void receiveLoginStatus(bool);
+signals:
+    void sendLoginInfo(QString,QString);
 private:
     Ui::CLI *ui;
 };

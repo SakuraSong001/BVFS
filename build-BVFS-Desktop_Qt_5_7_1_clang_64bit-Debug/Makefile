@@ -219,7 +219,8 @@ DIST          = ../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../BVFS/stacki.h \
 		../BVFS/gui.h \
 		../BVFS/cli.h \
-		../BVFS/ini.h ../BVFS/main.cpp \
+		../BVFS/ini.h \
+		../BVFS/main.h ../BVFS/main.cpp \
 		../BVFS/mainwindow.cpp \
 		../BVFS/gui.cpp \
 		../BVFS/cli.cpp \
@@ -556,7 +557,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h ../BVFS/gui.h ../BVFS/cli.h ../BVFS/ini.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h ../BVFS/gui.h ../BVFS/cli.h ../BVFS/ini.h ../BVFS/main.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/main.cpp ../BVFS/mainwindow.cpp ../BVFS/gui.cpp ../BVFS/cli.cpp ../BVFS/ini.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/mainwindow.ui ../BVFS/gui.ui ../BVFS/cli.ui ../BVFS/ini.ui $(DISTDIR)/
 
@@ -644,14 +645,22 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../BVFS/main.cpp ../BVFS/mainwindow.h \
+main.o: ../BVFS/main.cpp ../BVFS/main.h \
+		../BVFS/mainwindow.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../BVFS/gui.h \
 		../BVFS/cli.h \
 		../BVFS/ini.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../BVFS/main.cpp
+
+mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_mainwindow.h \
+		../BVFS/gui.h \
 		../BVFS/run.h \
 		../BVFS/filesystem.h \
 		../BVFS/file.h \
@@ -662,13 +671,6 @@ main.o: ../BVFS/main.cpp ../BVFS/mainwindow.h \
 		../BVFS/directory.h \
 		../BVFS/register.h \
 		../BVFS/help.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../BVFS/main.cpp
-
-mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \
-		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h \
-		../BVFS/gui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../BVFS/mainwindow.cpp
 
 gui.o: ../BVFS/gui.cpp ../BVFS/gui.h \
@@ -683,6 +685,7 @@ cli.o: ../BVFS/cli.cpp ../BVFS/cli.h \
 		ui_cli.h \
 		../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../BVFS/main.h \
 		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTime \
 		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cli.o ../BVFS/cli.cpp

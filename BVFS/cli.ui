@@ -43,7 +43,7 @@
     <item>
      <widget class="QLineEdit" name="lineEdit">
       <property name="text">
-       <string># Leeeeo @ LeeeeoLius-MacBook-Pro in ~/Code/BVFS on git:master x [14:30:01]$</string>
+       <string/>
       </property>
       <property name="frame">
        <bool>false</bool>

@@ -1,3 +1,5 @@
+#ifndef FILESYSTEM_H
+#define FILESYSTEM_H
 /*
 *  define some const and struct
 */
@@ -238,3 +240,4 @@ vector<string>PWD;
 
 extern void login();
 
+#endif
