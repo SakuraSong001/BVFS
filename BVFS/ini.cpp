@@ -39,10 +39,11 @@ void iNI::on_refresh_clicked()
 void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFileDirectory* sfdPoint)
 {
 
-    for(int i=0;i<INODENUM;i++)
-    {
-     ui->tableWidget->removeRow(i);
-    }
+
+    for(int i = ui->tableWidget->rowCount();i > 0;i--)
+      {
+         ui->tableWidget->removeRow(0);
+      }
     for (int i = 0; i<INODENUM; i++)
     {
        int row=ui->tableWidget->rowCount();
@@ -66,10 +67,11 @@ void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFi
         }
     }
 
-    for(int i=0;i<mfdPoint.sz;i++)
-    {
-      ui->tableWidget_2->removeRow(i);
-    }
+
+    for(int i = ui->tableWidget_2->rowCount();i > 0;i--)
+      {
+         ui->tableWidget_2->removeRow(0);
+      }
     for (int i = 0; i <mfdPoint.sz; i++)//mfd
     {
         if(mfdPoint.item[i].iNode!=-1)
@@ -84,23 +86,24 @@ void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFi
             break;
     }
 
-    for(int i=0;i<sfdPoint->sz;i++)
-    {
-      ui->tableWidget_3->removeRow(i);
-    }
+    for(int i = ui->tableWidget_3->rowCount();i > 0;i--)
+      {
+         ui->tableWidget_3->removeRow(0);
+      }
     for(int i=0;i<DIRECTORYNUM;i++) {
        if(sfdPoint[i].iNode!=-1)
        {
-           int row=ui->tableWidget_3->rowCount();
-           ui->tableWidget_3->setRowCount(row+1);
-           ui->tableWidget_3->setItem(i,0,new QTableWidgetItem(QString::number(sfdPoint[i].iNode)));
+
 
            for (int j = 0; j <DIRECTORYITEMNUM; j++)
            {
                if(sfdPoint[i].item[j].iNode!=-1)
                {
-                 ui->tableWidget_3->setItem(i,1,new QTableWidgetItem(sfdPoint[i].item[j].name));
-                 ui->tableWidget_3->setItem(i,2,new QTableWidgetItem(QString::number(sfdPoint[i].item[j].iNode)));
+                 int row=ui->tableWidget_3->rowCount();
+                 ui->tableWidget_3->setRowCount(row+1);
+                 ui->tableWidget_3->setItem(j,0,new QTableWidgetItem(QString::number(sfdPoint[i].iNode)));
+                 ui->tableWidget_3->setItem(j,1,new QTableWidgetItem(sfdPoint[i].item[j].name));
+                 ui->tableWidget_3->setItem(j,2,new QTableWidgetItem(QString::number(sfdPoint[i].item[j].iNode)));
                }
                else
                    break;
