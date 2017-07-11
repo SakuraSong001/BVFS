@@ -6,6 +6,7 @@
 #include <QMessageBox>
 using namespace std;
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -60,6 +61,57 @@ void MainWindow::receiveLoginInfo(QString name, QString psw)
 //    QMessageBox::information(this, QString::fromLocal8Bit("警告"),psw);
 
 }
+void MainWindow::receiveSetInodeInfo(bool flag)
+{
+    if(flag==true)
+    {
+       INode  inodeToini[INODENUM];
+       INode* inodePoint=inodeToini;
+
+       for (int i = 0; i<INODENUM; i++)
+       {
+
+          inodeToini[i].id=inode[i].id;
+          inodeToini[i].fileCount=inode[i].fileCount;
+          inodeToini[i].size= inode[i].size ;
+          inodeToini[i].fileMode=inode[i].fileMode;
+          inodeToini[i].userId=inode[i].userId;
+           for(int j=0;j<DIRECTORYITEMNUM;j++) {
+               inodeToini[i].userRight[j]=inode[i].userRight[j];
+           }
+           for (int j = 0; j < DISKADDRESSNUM; j++)
+           {
+               inodeToini[i].diskAddress[j] = inode[i].diskAddress[j];
+           }
+       }
+
+
+       MainFileDirectory mfdPoint;
+       mfdPoint.sz=MFD.sz;
+       for (int i = 0; i < MFD.size(); i++)//mfd
+       {
+           mfdPoint.item[i].iNode=MFD.item[i].iNode;
+
+           strcpy(mfdPoint.item[i].name,MFD.item[i].name);
+
+           strcpy( mfdPoint.item[i].psw,MFD.item[i].psw);
+       }
+
+       SymbolFileDirectory sfd[DIRECTORYNUM];
+       SymbolFileDirectory* sfdPoint=sfd;
+       for(int i=0;i<DIRECTORYNUM;i++) {
+
+           sfd[i].iNode=sfdTable[i].iNode;
+           for (int j = 0; j < SFD.size(); j++)
+           {
+               strcmp(sfd[i].item[j].name,sfdTable[i].item[j].name);
+               sfd[i].item[j].iNode=sfdTable[i].item[j].iNode;
+           }
+
+       }
+
+       emit sendInodeToIni(inodePoint,mfdPoint,sfdPoint);
+    }
 
 void MainWindow::receiveOrder(QString o)
 {
