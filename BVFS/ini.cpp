@@ -112,3 +112,8 @@ void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFi
 
     }
 }
+
+void iNI::receiveRefreshAction(){
+    flag=true;
+    emit sendGetInodeDataInfo(flag);
+}
