@@ -101,9 +101,9 @@ void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFi
                {
                  int row=ui->tableWidget_3->rowCount();
                  ui->tableWidget_3->setRowCount(row+1);
-                 ui->tableWidget_3->setItem(j,0,new QTableWidgetItem(QString::number(sfdPoint[i].iNode)));
-                 ui->tableWidget_3->setItem(j,1,new QTableWidgetItem(sfdPoint[i].item[j].name));
-                 ui->tableWidget_3->setItem(j,2,new QTableWidgetItem(QString::number(sfdPoint[i].item[j].iNode)));
+                 ui->tableWidget_3->setItem(row,0,new QTableWidgetItem(QString::number(sfdPoint[i].iNode)));
+                 ui->tableWidget_3->setItem(row,1,new QTableWidgetItem(sfdPoint[i].item[j].name));
+                 ui->tableWidget_3->setItem(row,2,new QTableWidgetItem(QString::number(sfdPoint[i].item[j].iNode)));
                }
                else
                    break;

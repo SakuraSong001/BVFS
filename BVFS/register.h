@@ -18,23 +18,34 @@ void testAndRegister() {
         cout<<"error: you don't have this right!"<<endl;
         return ;
     }
-    userRegister();
+//    userRegister();
 }
-void userRegister() {
-
+bool userRegister(string n,string p) {
 	char name[NAMESIZE];
 	char psw[NAMESIZE];
-	cout << "new username(integer or character): ";
-	cin >> name;
-	cout << "set password(integer or character): ";
-	cin >> psw;
+    int i;
+    for( i=0;i<n.length();i++)
+        name[i] = n[i];
+    name[i] = '\0';
+    for( i=0;i<p.length();i++)
+        psw[i] = p[i];
+    psw[i] = '\0';
+//    printf("%s\n",p);
+//    name=n.c_str();
+//    psw=p.c_str();
+//	cout << "new username(integer or character): ";
+//	cin >> name;
+//	cout << "set password(integer or character): ";
+//	cin >> psw;
 	if (addUser(name, psw) != -1) {
 		cout << "Register Successfully!" << endl;
-        char tmp[2];
-		gets(tmp);
+//        char tmp[2];
+//		gets(tmp);
+        return true;
 	}
 	else {
 		cout << "error: " << endl;
+        return false;
 	}
 }
 /*

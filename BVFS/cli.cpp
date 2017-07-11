@@ -14,6 +14,9 @@ QString cmdTime;
 QString front;
 QString his;
 QString file;
+QString userRegist=NULL;
+QString pswRegist=NULL;
+bool registMark=false;
 bool userStatus=false;
 int tabIndex=0;
 
@@ -46,7 +49,39 @@ void CLI::receiveShow()
 
 void CLI::on_lineEdit_returnPressed()
 {
-    if(userCurrent.count()==0)
+    if(ui->lineEdit->text()=="exit")
+    {
+            exit(0);
+    }else if(registMark)
+    {
+        if(userRegist.count()==0)
+        {
+            QString order=ui->lineEdit->text();
+            order=order.section('$',1,1);
+            userRegist=order;
+            ui->textEdit->append(userRegist+"'s password:");
+            cmdTime=QTime::currentTime().toString("hh:mm:ss");
+    //        ui->textEdit->append(ui->lineEdit->text());
+            this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+            front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+            ui->lineEdit->setText(front);
+        }else
+        {
+            QString order=ui->lineEdit->text();
+            order=order.section('$',1,1);
+            pswRegist=order;
+//            ui->textEdit->append(userRegist+"'s password:");
+            cmdTime=QTime::currentTime().toString("hh:mm:ss");
+    //        ui->textEdit->append(ui->lineEdit->text());
+            this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+            front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+            ui->lineEdit->setText(front);
+            emit sendUserAddContent(userRegist,pswRegist);
+            registMark=false;
+            userRegist.clear();
+            pswRegist.clear();
+        }
+    }else if(userCurrent.count()==0)
     {
 
         userCurrent=ui->lineEdit->text();
@@ -72,9 +107,6 @@ void CLI::on_lineEdit_returnPressed()
         this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
         front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
         ui->lineEdit->setText(front);
-    }else if(ui->lineEdit->text()=="exit")
-    {
-        exit(0);
     }else if(userStatus){
         QString order=ui->lineEdit->text();
         order=order.section('$',1,1);
@@ -232,4 +264,28 @@ void CLI::receiveLogoutAction()
     userCurrent.clear();
     pswCurrent.clear();
     ui->lineEdit->clear();
+}
+
+void CLI::receiveUserAddAction()
+{
+    if(userCurrent!="root")
+    {
+        ui->textEdit->append("Permission denied");
+    }
+    else
+    {
+        ui->textEdit->append("uesrname:");
+        registMark=true;
+    }
+}
+
+void CLI::receiveUserAddStatus(bool r)
+{
+    if(r)
+    {
+        ui->textEdit->append("Register Successfully!");
+    }else
+    {
+        ui->textEdit->append("Failed!");
+    }
 }

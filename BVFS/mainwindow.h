@@ -89,6 +89,7 @@ private slots:
     void receiveSetInodeInfo(bool);
     void receiveOrder(QString);
     void receiveVimContent(QString,QString);
+    void receiveUserAddContent(QString,QString);
 
 signals:
     void showGUI();
@@ -105,6 +106,8 @@ signals:
     void sendHelpReturn(QString);
     void sendClsAction();
     void sendLogoutAction();
+    void sendUserAddAction();
+    void sendUserAddStatus(bool);
 private:
     Ui::MainWindow *ui;
 

@@ -29,11 +29,15 @@ private slots:
     void receiveHelpReturn(QString);
     void receiveClsAction();
     void receiveLogoutAction();
+    void receiveUserAddAction();
+    void receiveUserAddStatus(bool);
+
 signals:
     void sendLoginInfo(QString,QString);
     void sendOrder(QString);
     void sendVimContent(QString,QString);
     void sendRefreshAction();
+    void sendUserAddContent(QString,QString);
 private:
     Ui::CLI *ui;
 };

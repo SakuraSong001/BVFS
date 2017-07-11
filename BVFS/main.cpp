@@ -40,6 +40,9 @@ int main(int argc, char *argv[])
     QObject::connect(&w,SIGNAL(sendHelpReturn(QString)),&c,SLOT(receiveHelpReturn(QString)));
     QObject::connect(&w,SIGNAL(sendClsAction()),&c,SLOT(receiveClsAction()));
     QObject::connect(&w,SIGNAL(sendLogoutAction()),&c,SLOT(receiveLogoutAction()));
+    QObject::connect(&w,SIGNAL(sendUserAddAction()),&c,SLOT(receiveUserAddAction()));
+    QObject::connect(&c,SIGNAL(sendUserAddContent(QString,QString)),&w,SLOT(receiveUserAddContent(QString,QString)));
+    QObject::connect(&w,SIGNAL(sendUserAddStatus(bool)),&c,SLOT(receiveUserAddStatus(bool)));
 //    title();
 
 //    run();

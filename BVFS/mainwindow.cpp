@@ -195,8 +195,9 @@ void MainWindow::receiveOrder(QString o)
         }
     } else if(order == "pwd") {
         emit sendPwdReturn(QString::fromStdString(pwd()));
-    } else if(order == "register") {
-        testAndRegister();
+    } else if(order == "useradd") {
+        emit sendUserAddAction();
+//        userRegister();
     } else if(order.find("renamef") == 0) {
         string dir1 = "";
         string dir2 = "";
@@ -326,4 +327,19 @@ void MainWindow::receiveVimContent(QString file,QString content)
     string c=content.toStdString();
     vim(f,c);
     emit sendRefreshAction();
+}
+
+void MainWindow::receiveUserAddContent(QString n, QString p)
+{
+    bool status=userRegister(n.toStdString(), p.toStdString());
+    emit sendUserAddStatus(status);
+//    if (addUser(n.toStdString(), p.toStdString()) != -1) {
+//        cout << "Register Successfully!" << endl;
+//        emit sendUserAddStatus(true);
+//    }
+//    else {
+//        cout << "error: " << endl;
+//        emit sendUserAddStatus(false);
+//    }
+
 }
