@@ -104,7 +104,7 @@ void MainWindow::receiveSetInodeInfo(bool flag)
            sfd[i].iNode=sfdTable[i].iNode;
            for (int j = 0; j < SFD.size(); j++)
            {
-               strcmp(sfd[i].item[j].name,sfdTable[i].item[j].name);
+               strcpy(sfd[i].item[j].name,sfdTable[i].item[j].name);
                sfd[i].item[j].iNode=sfdTable[i].item[j].iNode;
            }
 
