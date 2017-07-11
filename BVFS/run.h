@@ -63,7 +63,7 @@ void run() {
                     file+=order[i];
                 }
                 if(file.size() > 0) {
-                    cat(file);
+//                    cat(file);
                 }
             }
         } else if(order.find("cd") == 0) {
@@ -79,7 +79,7 @@ void run() {
                     dir+=order[i];
                 }
                 if(dir.size() > 0) {
-                    cd(dir);
+//                    cd(dir);
                 }
             }
         } else if(order == "exit") {
@@ -89,7 +89,7 @@ void run() {
         } else if(order == "help"){
             help();
         } else if(order == "ll") {
-            ll();
+//            ll();
         } else if(order == "login") {
             if(loginUser.username != "/") {
                 cout<<"error: you has logined!"<<endl;
@@ -100,7 +100,7 @@ void run() {
             strcpy(loginUser.username,"/");
             run();
         } else if(order == "ls") {
-            ls();
+//            ls();
         } else if(order.find("mkdir") == 0) {
             string dir = "";
             int i=5;
@@ -118,7 +118,7 @@ void run() {
                 }
             }
         } else if(order == "pwd") {
-            pwd();
+//            pwd();
         } else if(order == "register") {
             testAndRegister();
         } else if(order.find("renamef") == 0) {
@@ -220,7 +220,8 @@ void run() {
                     file+=order[i];
                 }
                 if(file.size() > 0) {
-                    vim(file);
+
+//                    vim(file);
                 }
             }
         }

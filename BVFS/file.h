@@ -107,8 +107,8 @@ int createFile(string fname)
 	return 1;
 }
 
-void vim(string file) {
-
+void vim(string file,string content) {
+    cout<<file<<"<<"<<content<<endl;
     int iNode = getINodeOfCurrentPath();
     bool flag = 0;
     for(int i=0;i<DIRECTORYITEMNUM;i++) {
@@ -123,8 +123,9 @@ void vim(string file) {
     }
 
     //cout<<file<<endl;
-    string content;
-    getline(cin,content);
+//    string content;
+//    getline(cin,content);
+//    content
     int diskAddress[100];
     memset(diskAddress,-1,sizeof(diskAddress));
     groupblock(content,diskAddress);
@@ -170,8 +171,9 @@ void renamef(string dir1,string dir2) {
     writenIn();
 }
 
-void cat(string file) {
+string cat(string file) {
     //cout<<file<<endl;
+    string catReturn="";
     int iNode = getINodeOfCurrentPath();
 
     int fileINode;
@@ -185,10 +187,14 @@ void cat(string file) {
     for(int i=0;i<DISKADDRESSNUM;i++) {
         if(inode[fileINode].diskAddress[i] != -1) {
             //cout<<inode[fileINode].diskAddress[i]<<endl;
-            printf("%s",Z[inode[fileINode].diskAddress[i]].R);
+            catReturn+=Z[inode[fileINode].diskAddress[i]].R;
+//            printf("%s",Z[inode[fileINode].diskAddress[i]].R);
             //puts(Z[inode[fileINode].diskAddress[i]].R);
         }
 
     }
-    cout<<endl;
+//    cout<<endl;
+    catReturn+="\n";
+    cout<<catReturn<<endl;
+    return catReturn;
 }

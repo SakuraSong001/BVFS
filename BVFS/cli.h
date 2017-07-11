@@ -20,8 +20,16 @@ private slots:
     void receiveShow();
     void on_lineEdit_returnPressed();
     void receiveLoginStatus(bool);
+    void receiveRoute(QString);
+    void receiveCatReturn(QString);
+    void receiveLsReturn(QString);
+    void receiveLlReturn(QString);
+    void receivePwdReturn(QString);
+    void receiveVimAction(QString);
 signals:
     void sendLoginInfo(QString,QString);
+    void sendOrder(QString);
+    void sendVimContent(QString,QString);
 private:
     Ui::CLI *ui;
 };

@@ -87,12 +87,20 @@ private slots:
     void on_pushButton_clicked();
     void receiveLoginInfo(QString,QString);
     void receiveSetInodeInfo(bool);
+    void receiveOrder(QString);
+    void receiveVimContent(QString,QString);
 
 signals:
     void showGUI();
     void showCLI();
     void sendLoginStatus(bool);
     void sendInodeToIni(INode*,MainFileDirectory,SymbolFileDirectory*);
+    void sendRoute(QString);
+    void sendCatReturn(QString);
+    void sendLsReturn(QString);
+    void sendLlReturn(QString);
+    void sendPwdReturn(QString);
+    void sendVimAction(QString);
 private:
     Ui::MainWindow *ui;
 

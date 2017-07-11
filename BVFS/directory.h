@@ -8,6 +8,7 @@
 #include <fstream>
 #include <queue>
 #include <time.h>
+#include <sstream>
 #include "filesystem.h"
 using namespace std;
 
@@ -94,17 +95,22 @@ void cd_back() {
         PWD.erase(PWD.end());
     }
 }
-void pwd() {
-
+string pwd() {
+    string pwdReturn="";
     vector<string>::iterator it;
     cout<<"/";
+    pwdReturn+="/";
     for(it = PWD.begin();it!=PWD.end();it++) {
+        pwdReturn+=*it;
+        pwdReturn+="/";
         cout<<*it<<"/";
     }
     cout<<endl;
+    pwdReturn+="\n";
+    return pwdReturn;
 }
-void ls() {
-
+string ls() {
+    string lsReturn="";
     //judge wheather user have this right
     int iNode = getINodeOfCurrentPath();
     for(int i=0;i<DIRECTORYITEMNUM;i++) {
@@ -112,16 +118,25 @@ void ls() {
         //cout<<strlen(sfdTable[iNode].item[i].name)<<endl;
         if(sfdTable[inode[iNode].diskAddress[0]].item[i].iNode != -1) {
             if(strcmp(sfdTable[inode[iNode].diskAddress[0]].item[i].name,"/") != 0) {
-                cout<<sfdTable[inode[iNode].diskAddress[0]].item[i].name<<" ";
+                lsReturn+=sfdTable[inode[iNode].diskAddress[0]].item[i].name;
+                lsReturn+=" ";
+//                cout<<sfdTable[inode[iNode].diskAddress[0]].item[i].name<<" ";
             }
         }
     }
-    cout<<endl;
+    lsReturn+="\n";
+    return lsReturn;
 }
-void ll() {
+string ll() {
     //需要添加时间
-
+    string llReturn="";
     int iNode = getINodeOfCurrentPath();
+    llReturn+="total ";
+//    string tmpstr=inode[iNode].size+"";
+    ostringstream sstr2;
+    sstr2<<inode[iNode].size;
+    llReturn+=sstr2.str();
+    llReturn+="B\n";
     cout<<"total "<<inode[iNode].size<<"B"<<endl;
     for(int i=0;i<DIRECTORYITEMNUM;i++) {
         if(sfdTable[inode[iNode].diskAddress[0]].item[i].iNode != -1) {
@@ -131,38 +146,62 @@ void ll() {
                 switch (inode[tmp].userRight[loginUser.id]){
                     case 0:
                         cout<<"---"<<" ";
+                        llReturn+="--- ";
                         break;
                     case 1:
                         cout<<"r--"<<" ";
+                        llReturn+="r-- ";
                         break;
                     case 2:
                         cout<<"-w-"<<" ";
+                        llReturn+="-w- ";
                         break;
                     case 3:
                         cout<<"rw-"<<" ";
+                        llReturn+="rw- ";
                         break;
                     case 4:
                         cout<<"--x"<<" ";
+                        llReturn+="--x ";
                         break;
                     case 5:
                         cout<<"r-x"<<" ";
+                        llReturn+="r-x ";
                         break;
                     case 6:
                         cout<<"-wx"<<" ";
+                        llReturn+="-wx ";
                         break;
                     case 7:
                         cout<<"rwx"<<" ";
+                        llReturn+="rwx ";
                         break;
                 }
                 cout<<MFD.item[inode[tmp].userId].name<<" ";
+                llReturn+=MFD.item[inode[tmp].userId].name;
+                llReturn+=" ";
                 cout<<inode[tmp].size<<"B"<<" ";
+                ostringstream sstr3;
+                sstr3<<inode[tmp].size;
+//                tmpstr=inode[tmp].size+"";
+                llReturn+=sstr3.str();
+                llReturn+="B ";
                 cout<<inode[tmp].time.tdate<<" "<<inode[tmp].time.ttime<<" ";
+                llReturn+=inode[tmp].time.tdate;
+                llReturn+=" ";
+                llReturn+=inode[tmp].time.ttime;
+                llReturn+=" ";
                 cout<<sfdTable[inode[iNode].diskAddress[0]].item[i].name<<" ";
+                llReturn+=sfdTable[inode[iNode].diskAddress[0]].item[i].name;
+                llReturn+=" ";
             }
             cout<<endl;
+            llReturn+="\n";
         }
     }
     cout<<endl;
+//    llReturn+="\n";
+    return llReturn;
 }
 
 int sfdMalloc(int getINode) {

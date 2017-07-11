@@ -52,7 +52,8 @@ SOURCES       = ../BVFS/main.cpp \
 		../BVFS/mainwindow.cpp \
 		../BVFS/gui.cpp \
 		../BVFS/cli.cpp \
-		../BVFS/ini.cpp moc_mainwindow.cpp \
+		../BVFS/ini.cpp qrc_picture.cpp \
+		moc_mainwindow.cpp \
 		moc_gui.cpp \
 		moc_cli.cpp \
 		moc_ini.cpp
@@ -61,6 +62,7 @@ OBJECTS       = main.o \
 		gui.o \
 		cli.o \
 		ini.o \
+		qrc_picture.o \
 		moc_mainwindow.o \
 		moc_gui.o \
 		moc_cli.o \
@@ -379,6 +381,7 @@ Makefile: ../BVFS/BVFS.pro ../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf .
 		../../Qt/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../Qt/5.7/clang_64/mkspecs/features/lex.prf \
 		../BVFS/BVFS.pro \
+		../BVFS/picture.qrc \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../Qt/5.7/clang_64/lib/QtCore.framework/QtCore.prl
@@ -525,6 +528,7 @@ Makefile: ../BVFS/BVFS.pro ../../Qt/5.7/clang_64/mkspecs/macx-clang/qmake.conf .
 ../../Qt/5.7/clang_64/mkspecs/features/yacc.prf:
 ../../Qt/5.7/clang_64/mkspecs/features/lex.prf:
 ../BVFS/BVFS.pro:
+../BVFS/picture.qrc:
 ../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../Qt/5.7/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -557,6 +561,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/picture.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h ../BVFS/gui.h ../BVFS/cli.h ../BVFS/ini.h ../BVFS/main.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/main.cpp ../BVFS/mainwindow.cpp ../BVFS/gui.cpp ../BVFS/cli.cpp ../BVFS/ini.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/mainwindow.ui ../BVFS/gui.ui ../BVFS/cli.ui ../BVFS/ini.ui $(DISTDIR)/
@@ -583,8 +588,43 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_picture.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_picture.cpp
+qrc_picture.cpp: ../BVFS/picture.qrc \
+		../../Qt/5.7/clang_64/bin/rcc \
+		../BVFS/new1.png \
+		../BVFS/edit1.png \
+		../BVFS/home1.png \
+		../BVFS/new2.png \
+		../BVFS/edit2.png \
+		../BVFS/forward1.png \
+		../BVFS/delete.png \
+		../BVFS/home2.png \
+		../BVFS/forward2.png \
+		../BVFS/delete1.png \
+		../BVFS/delete2.png \
+		../BVFS/list.png \
+		../BVFS/list1.png \
+		../BVFS/list2.png \
+		../BVFS/icon.png \
+		../BVFS/file1.png \
+		../BVFS/icon1.png \
+		../BVFS/file2.png \
+		../BVFS/icon2.png \
+		../BVFS/back1.png \
+		../BVFS/edit.png \
+		../BVFS/file21.png \
+		../BVFS/file22.png \
+		../BVFS/back2.png \
+		../BVFS/back.png \
+		../BVFS/new.png \
+		../BVFS/forward.png \
+		../BVFS/file11.png \
+		../BVFS/home.png \
+		../BVFS/file12.png
+	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/rcc -name picture ../BVFS/picture.qrc -o qrc_picture.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp
@@ -641,7 +681,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -670,7 +710,9 @@ mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \
 		../BVFS/freeblocklink.h \
 		../BVFS/directory.h \
 		../BVFS/register.h \
-		../BVFS/help.h
+		../BVFS/help.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../BVFS/mainwindow.cpp
 
 gui.o: ../BVFS/gui.cpp ../BVFS/gui.h \
@@ -695,6 +737,9 @@ ini.o: ../BVFS/ini.cpp ../BVFS/ini.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_ini.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ini.o ../BVFS/ini.cpp
+
+qrc_picture.o: qrc_picture.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_picture.o qrc_picture.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
