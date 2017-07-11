@@ -17,6 +17,10 @@ public:
 
 private slots:
     void receiveShow();
+//点击事件
+    void on_back_clicked();
+
+
 
 private:
     Ui::GUI *ui;

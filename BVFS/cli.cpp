@@ -12,6 +12,8 @@ QString pswCurrent=NULL;
 QString route;
 QString cmdTime;
 QString front;
+QString his;
+QString file;
 bool userStatus=false;
 int tabIndex=0;
 
@@ -59,11 +61,24 @@ void CLI::on_lineEdit_returnPressed()
 //        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
 //        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
 //        ui->lineEdit->setText(front);
+    }else if(ui->lineEdit->text()==":wq")
+    {
+        emit sendVimContent(file,ui->textEdit->toPlainText());
+        ui->textEdit->clear();
+        ui->textEdit->append(his);
+        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        ui->textEdit->append(ui->lineEdit->text());
+        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+        ui->lineEdit->setText(front);
     }else if(userStatus){
         QString order=ui->lineEdit->text();
-        ui->textEdit->append(order.section('$',1,1));
-        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+        order=order.section('$',1,1);
         ui->textEdit->append(ui->lineEdit->text());
+        emit sendOrder(order);
+
+        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        ui->textEdit->append(ui->lineEdit->text());
         this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
         front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
         ui->lineEdit->setText(front);
@@ -116,6 +131,10 @@ void CLI::keyPressEvent(QKeyEvent  *event)
      }else if(event->key()==Qt::Key_5)
      {
          ui->tabWidget->setCurrentIndex(4);
+     }else if(event->key()==Qt::Key_Escape)
+     {
+         ui->lineEdit->clear();
+         ui->lineEdit->setFocus();
      }
 }
 
@@ -126,11 +145,11 @@ void CLI::receiveLoginStatus(bool status)
     {
         ui->textEdit->append(userCurrent+" login sucessfully!");
 //        ui->textEdit->append("\n");
-        cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        cmdTime=QTime::currentTime().toString("hh:mm:ss");
 //        ui->textEdit->append(ui->lineEdit->text());
-        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
-        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
-        ui->lineEdit->setText(front);
+//        this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+//        front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
+//        ui->lineEdit->setText(front);
     }else
     {
         ui->textEdit->append("\nWrong Password!Please try again!\n");
@@ -139,4 +158,44 @@ void CLI::receiveLoginStatus(bool status)
         ui->textEdit->append("login:");
         ui->lineEdit->clear();
     }
+}
+
+void CLI::receiveRoute(QString r)
+{
+    route=r;
+    cmdTime=QTime::currentTime().toString("hh:mm:ss");
+//        ui->textEdit->append(ui->lineEdit->text());
+    this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
+    front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+" ["+cmdTime+"]$";
+    ui->lineEdit->setText(front);
+}
+
+void CLI::receiveCatReturn(QString r)
+{
+    ui->textEdit->append(r);
+}
+
+void CLI::receiveLsReturn(QString r)
+{
+    ui->textEdit->append(r);
+}
+
+void CLI::receiveLlReturn(QString r)
+{
+    ui->textEdit->append(r);
+}
+
+void CLI::receivePwdReturn(QString r)
+{
+    ui->textEdit->append(r);
+}
+
+void CLI::receiveVimAction(QString f)
+{
+    file=f;
+    his=ui->textEdit->toPlainText();
+    ui->textEdit->clear();
+//    ui->lineEdit->clear();
+    ui->textEdit->setReadOnly(false);
+//    ui->lineEdit->clear();
 }

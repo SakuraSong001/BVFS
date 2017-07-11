@@ -48,3 +48,7 @@ FORMS    += mainwindow.ui \
     gui.ui \
     cli.ui \
     ini.ui
+
+RESOURCES += \
+    picture.qrc
+
