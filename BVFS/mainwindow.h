@@ -102,6 +102,9 @@ signals:
     void sendPwdReturn(QString);
     void sendVimAction(QString);
     void sendRefreshAction();
+    void sendHelpReturn(QString);
+    void sendClsAction();
+    void sendLogoutAction();
 private:
     Ui::MainWindow *ui;
 

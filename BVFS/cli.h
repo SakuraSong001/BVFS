@@ -26,6 +26,9 @@ private slots:
     void receiveLlReturn(QString);
     void receivePwdReturn(QString);
     void receiveVimAction(QString);
+    void receiveHelpReturn(QString);
+    void receiveClsAction();
+    void receiveLogoutAction();
 signals:
     void sendLoginInfo(QString,QString);
     void sendOrder(QString);

@@ -72,6 +72,9 @@ void CLI::on_lineEdit_returnPressed()
         this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
         front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
         ui->lineEdit->setText(front);
+    }else if(ui->lineEdit->text()=="exit")
+    {
+        exit(0);
     }else if(userStatus){
         QString order=ui->lineEdit->text();
         order=order.section('$',1,1);
@@ -84,6 +87,8 @@ void CLI::on_lineEdit_returnPressed()
         front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
         ui->lineEdit->setText(front);
         cout<<"enter pressed"<<endl;
+        if(order=="logout")
+            ui->lineEdit->clear();
     }
     emit sendRefreshAction();
 }
@@ -207,4 +212,24 @@ void CLI::receiveVimAction(QString f)
     ui->textEdit->setReadOnly(false);
     emit sendRefreshAction();
 //    ui->lineEdit->clear();
+}
+
+void CLI::receiveHelpReturn(QString r)
+{
+    ui->textEdit->append(r);
+}
+
+void CLI::receiveClsAction()
+{
+    ui->textEdit->clear();
+}
+
+void CLI::receiveLogoutAction()
+{
+    ui->textEdit->clear();
+    ui->textEdit->moveCursor(QTextCursor::End);
+    ui->textEdit->append("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
+    userCurrent.clear();
+    pswCurrent.clear();
+    ui->lineEdit->clear();
 }

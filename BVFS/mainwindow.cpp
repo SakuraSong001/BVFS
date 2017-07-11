@@ -116,6 +116,7 @@ void MainWindow::receiveSetInodeInfo(bool flag)
 }
 void MainWindow::receiveOrder(QString o)
 {
+    bool loginS=true;
     string order;
     order=o.toStdString();
     if(order.find("cat") == 0) {
@@ -152,10 +153,13 @@ void MainWindow::receiveOrder(QString o)
         }
     } else if(order == "exit") {
         exit(0);
-    } else if(order == "format"){
+    } else if(order == "cls") {
+        emit sendClsAction();
+    }else if(order == "format"){
         sudoFormat();
     } else if(order == "help"){
-        help();
+//        help();
+        emit sendHelpReturn(QString::fromStdString(help()));
     } else if(order == "ll") {
         emit sendLsReturn(QString::fromStdString(ll()));
 //        ll();
@@ -167,7 +171,9 @@ void MainWindow::receiveOrder(QString o)
         }
     } else if(order == "logout") {
         strcpy(loginUser.username,"/");
-        run();
+//        run();
+        loginS=false;
+        emit sendLogoutAction();
     } else if(order == "ls") {
 //        ls();
         emit sendLsReturn(QString::fromStdString(ls()));
@@ -306,8 +312,12 @@ void MainWindow::receiveOrder(QString o)
 //        cout<<"/"<<*it;
     }
 //    cout<<"$ ";
-    emit sendRoute(QString::fromStdString(pwd));
-    emit sendRefreshAction();
+    if(loginS==true)
+    {
+        emit sendRoute(QString::fromStdString(pwd));
+        emit sendRefreshAction();
+        cout<<"logout"<<endl;
+    }
 }
 
 void MainWindow::receiveVimContent(QString file,QString content)

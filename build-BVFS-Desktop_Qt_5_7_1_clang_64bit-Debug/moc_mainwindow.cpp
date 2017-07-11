@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[23];
-    char stringdata0[344];
+    QByteArrayData data[26];
+    char stringdata0[390];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,13 +45,16 @@ QT_MOC_LITERAL(12, 142, 12), // "sendLlReturn"
 QT_MOC_LITERAL(13, 155, 13), // "sendPwdReturn"
 QT_MOC_LITERAL(14, 169, 13), // "sendVimAction"
 QT_MOC_LITERAL(15, 183, 17), // "sendRefreshAction"
-QT_MOC_LITERAL(16, 201, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(17, 225, 28), // "on_commandLinkButton_clicked"
-QT_MOC_LITERAL(18, 254, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(19, 276, 16), // "receiveLoginInfo"
-QT_MOC_LITERAL(20, 293, 19), // "receiveSetInodeInfo"
-QT_MOC_LITERAL(21, 313, 12), // "receiveOrder"
-QT_MOC_LITERAL(22, 326, 17) // "receiveVimContent"
+QT_MOC_LITERAL(16, 201, 14), // "sendHelpReturn"
+QT_MOC_LITERAL(17, 216, 13), // "sendClsAction"
+QT_MOC_LITERAL(18, 230, 16), // "sendLogoutAction"
+QT_MOC_LITERAL(19, 247, 23), // "on_pushButton_2_clicked"
+QT_MOC_LITERAL(20, 271, 28), // "on_commandLinkButton_clicked"
+QT_MOC_LITERAL(21, 300, 21), // "on_pushButton_clicked"
+QT_MOC_LITERAL(22, 322, 16), // "receiveLoginInfo"
+QT_MOC_LITERAL(23, 339, 19), // "receiveSetInodeInfo"
+QT_MOC_LITERAL(24, 359, 12), // "receiveOrder"
+QT_MOC_LITERAL(25, 372, 17) // "receiveVimContent"
 
     },
     "MainWindow\0showGUI\0\0showCLI\0sendLoginStatus\0"
@@ -59,7 +62,9 @@ QT_MOC_LITERAL(22, 326, 17) // "receiveVimContent"
     "SymbolFileDirectory*\0sendRoute\0"
     "sendCatReturn\0sendLsReturn\0sendLlReturn\0"
     "sendPwdReturn\0sendVimAction\0"
-    "sendRefreshAction\0on_pushButton_2_clicked\0"
+    "sendRefreshAction\0sendHelpReturn\0"
+    "sendClsAction\0sendLogoutAction\0"
+    "on_pushButton_2_clicked\0"
     "on_commandLinkButton_clicked\0"
     "on_pushButton_clicked\0receiveLoginInfo\0"
     "receiveSetInodeInfo\0receiveOrder\0"
@@ -73,34 +78,37 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      11,       // signalCount
+      14,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  104,    2, 0x06 /* Public */,
-       3,    0,  105,    2, 0x06 /* Public */,
-       4,    1,  106,    2, 0x06 /* Public */,
-       5,    3,  109,    2, 0x06 /* Public */,
-       9,    1,  116,    2, 0x06 /* Public */,
-      10,    1,  119,    2, 0x06 /* Public */,
-      11,    1,  122,    2, 0x06 /* Public */,
-      12,    1,  125,    2, 0x06 /* Public */,
-      13,    1,  128,    2, 0x06 /* Public */,
-      14,    1,  131,    2, 0x06 /* Public */,
-      15,    0,  134,    2, 0x06 /* Public */,
+       1,    0,  119,    2, 0x06 /* Public */,
+       3,    0,  120,    2, 0x06 /* Public */,
+       4,    1,  121,    2, 0x06 /* Public */,
+       5,    3,  124,    2, 0x06 /* Public */,
+       9,    1,  131,    2, 0x06 /* Public */,
+      10,    1,  134,    2, 0x06 /* Public */,
+      11,    1,  137,    2, 0x06 /* Public */,
+      12,    1,  140,    2, 0x06 /* Public */,
+      13,    1,  143,    2, 0x06 /* Public */,
+      14,    1,  146,    2, 0x06 /* Public */,
+      15,    0,  149,    2, 0x06 /* Public */,
+      16,    1,  150,    2, 0x06 /* Public */,
+      17,    0,  153,    2, 0x06 /* Public */,
+      18,    0,  154,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      16,    0,  135,    2, 0x08 /* Private */,
-      17,    0,  136,    2, 0x08 /* Private */,
-      18,    0,  137,    2, 0x08 /* Private */,
-      19,    2,  138,    2, 0x08 /* Private */,
-      20,    1,  143,    2, 0x08 /* Private */,
-      21,    1,  146,    2, 0x08 /* Private */,
-      22,    2,  149,    2, 0x08 /* Private */,
+      19,    0,  155,    2, 0x08 /* Private */,
+      20,    0,  156,    2, 0x08 /* Private */,
+      21,    0,  157,    2, 0x08 /* Private */,
+      22,    2,  158,    2, 0x08 /* Private */,
+      23,    1,  163,    2, 0x08 /* Private */,
+      24,    1,  166,    2, 0x08 /* Private */,
+      25,    2,  169,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -113,6 +121,9 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
     QMetaType::Void,
 
  // slots: parameters
@@ -144,13 +155,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->sendPwdReturn((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 9: _t->sendVimAction((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 10: _t->sendRefreshAction(); break;
-        case 11: _t->on_pushButton_2_clicked(); break;
-        case 12: _t->on_commandLinkButton_clicked(); break;
-        case 13: _t->on_pushButton_clicked(); break;
-        case 14: _t->receiveLoginInfo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 15: _t->receiveSetInodeInfo((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 16: _t->receiveOrder((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 17: _t->receiveVimContent((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 11: _t->sendHelpReturn((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 12: _t->sendClsAction(); break;
+        case 13: _t->sendLogoutAction(); break;
+        case 14: _t->on_pushButton_2_clicked(); break;
+        case 15: _t->on_commandLinkButton_clicked(); break;
+        case 16: _t->on_pushButton_clicked(); break;
+        case 17: _t->receiveLoginInfo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 18: _t->receiveSetInodeInfo((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->receiveOrder((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 20: _t->receiveVimContent((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -233,6 +247,27 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            typedef void (MainWindow::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::sendHelpReturn)) {
+                *result = 11;
+                return;
+            }
+        }
+        {
+            typedef void (MainWindow::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::sendClsAction)) {
+                *result = 12;
+                return;
+            }
+        }
+        {
+            typedef void (MainWindow::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::sendLogoutAction)) {
+                *result = 13;
+                return;
+            }
+        }
     }
 }
 
@@ -261,13 +296,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 21;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 21)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 18;
+        _id -= 21;
     }
     return _id;
 }
@@ -344,5 +379,24 @@ void MainWindow::sendVimAction(QString _t1)
 void MainWindow::sendRefreshAction()
 {
     QMetaObject::activate(this, &staticMetaObject, 10, Q_NULLPTR);
+}
+
+// SIGNAL 11
+void MainWindow::sendHelpReturn(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 11, _a);
+}
+
+// SIGNAL 12
+void MainWindow::sendClsAction()
+{
+    QMetaObject::activate(this, &staticMetaObject, 12, Q_NULLPTR);
+}
+
+// SIGNAL 13
+void MainWindow::sendLogoutAction()
+{
+    QMetaObject::activate(this, &staticMetaObject, 13, Q_NULLPTR);
 }
 QT_END_MOC_NAMESPACE

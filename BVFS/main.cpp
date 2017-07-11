@@ -37,6 +37,9 @@ int main(int argc, char *argv[])
     QObject::connect(&c,SIGNAL(sendVimContent(QString,QString)),&w,SLOT(receiveVimContent(QString,QString)));
     QObject::connect(&w,SIGNAL(sendRefreshAction()),&i,SLOT(receiveRefreshAction()));
     QObject::connect(&c,SIGNAL(sendRefreshAction()),&i,SLOT(receiveRefreshAction()));
+    QObject::connect(&w,SIGNAL(sendHelpReturn(QString)),&c,SLOT(receiveHelpReturn(QString)));
+    QObject::connect(&w,SIGNAL(sendClsAction()),&c,SLOT(receiveClsAction()));
+    QObject::connect(&w,SIGNAL(sendLogoutAction()),&c,SLOT(receiveLogoutAction()));
 //    title();
 
 //    run();
