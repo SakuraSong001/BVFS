@@ -36,7 +36,7 @@ void iNI::on_refresh_clicked()
 
 
 }
-void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint)
+void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint,SymbolFileDirectory* sfdPoint)
 {
 
     for(int i=0;i<INODENUM;i++)
@@ -82,5 +82,33 @@ void iNI::receiveInodeData(INode* inodePoint,MainFileDirectory mfdPoint)
         }
         else
             break;
+    }
+
+    for(int i=0;i<sfdPoint->sz;i++)
+    {
+      ui->tableWidget_3->removeRow(i);
+    }
+    for(int i=0;i<DIRECTORYNUM;i++) {
+       if(sfdPoint[i].iNode!=-1)
+       {
+           int row=ui->tableWidget_3->rowCount();
+           ui->tableWidget_3->setRowCount(row+1);
+           ui->tableWidget_3->setItem(i,0,new QTableWidgetItem(QString::number(sfdPoint[i].iNode)));
+
+           for (int j = 0; j <DIRECTORYITEMNUM; j++)
+           {
+               if(sfdPoint[i].item[j].iNode!=-1)
+               {
+                 ui->tableWidget_3->setItem(i,1,new QTableWidgetItem(sfdPoint[i].item[j].name));
+                 ui->tableWidget_3->setItem(i,2,new QTableWidgetItem(QString::number(sfdPoint[i].item[j].iNode)));
+               }
+               else
+                   break;
+           }
+       }
+       else
+           break;
+
+
     }
 }

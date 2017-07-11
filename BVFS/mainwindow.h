@@ -52,6 +52,18 @@ struct MainFileDirectory {
     MainFileDirectoryItem item[DIRECTORYITEMNUM];
     int sz;
 };
+
+//SFD定义
+struct SymbolFileDirectoryItem {
+    char name[DIRECTORYITEMLENGTH];	//文件名字
+    int iNode;			//i结点的编号,-1表示没有
+};
+struct SymbolFileDirectory {
+    int iNode;
+    SymbolFileDirectoryItem item[DIRECTORYITEMNUM];
+    int sz;
+    int right;
+};
 namespace Ui {
 class MainWindow;
 }
@@ -80,7 +92,7 @@ signals:
     void showGUI();
     void showCLI();
     void sendLoginStatus(bool);
-    void sendInodeToIni(INode*,MainFileDirectory);
+    void sendInodeToIni(INode*,MainFileDirectory,SymbolFileDirectory*);
 private:
     Ui::MainWindow *ui;
 

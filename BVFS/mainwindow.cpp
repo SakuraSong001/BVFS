@@ -95,6 +95,20 @@ void MainWindow::receiveSetInodeInfo(bool flag)
 
            strcpy( mfdPoint.item[i].psw,MFD.item[i].psw);
        }
-       emit sendInodeToIni(inodePoint,mfdPoint);
+
+       SymbolFileDirectory sfd[DIRECTORYNUM];
+       SymbolFileDirectory* sfdPoint=sfd;
+       for(int i=0;i<DIRECTORYNUM;i++) {
+
+           sfd[i].iNode=sfdTable[i].iNode;
+           for (int j = 0; j < SFD.size(); j++)
+           {
+               strcmp(sfd[i].item[j].name,sfdTable[i].item[j].name);
+               sfd[i].item[j].iNode=sfdTable[i].item[j].iNode;
+           }
+
+       }
+
+       emit sendInodeToIni(inodePoint,mfdPoint,sfdPoint);
     }
 }

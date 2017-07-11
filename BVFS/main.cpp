@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QObject::connect(&c,SIGNAL(sendLoginInfo(QString,QString)),&w,SLOT(receiveLoginInfo(QString,QString)));
     QObject::connect(&w,SIGNAL(sendLoginStatus(bool)),&c,SLOT(receiveLoginStatus(bool)));
 
-    QObject::connect(&w,SIGNAL(sendInodeToIni(INode*,MainFileDirectory)),&i,SLOT(receiveInodeData(INode*,MainFileDirectory)));
+    QObject::connect(&w,SIGNAL(sendInodeToIni(INode*,MainFileDirectory,SymbolFileDirectory*)),&i,SLOT(receiveInodeData(INode*,MainFileDirectory,SymbolFileDirectory*)));
     QObject::connect(&i,SIGNAL(sendGetInodeDataInfo(bool)),&w,SLOT(receiveSetInodeInfo(bool)));
 //    title();
 
