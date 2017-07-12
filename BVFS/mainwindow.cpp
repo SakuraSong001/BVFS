@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     init();
+    ui->lineEdit->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_2->setFocus();
 }
 
 MainWindow::~MainWindow()
@@ -22,8 +24,34 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    this->hide();
-    emit showGUI();
+    QString name=ui->lineEdit_2->text();
+    QString psw=ui->lineEdit->text();
+    if(login(name.toStdString(),psw.toStdString()))
+    {
+        this->hide();
+        emit showGUI();
+//        emit sendLoginStatus(true);
+//        string order;
+//        string pwd_tmp = "/root/";
+//        cout<<loginUser.username<<"@";
+        string pwd="";
+        vector<string>::iterator it;
+        for(it = PWD.begin();it!=PWD.end();it++) {
+            pwd+="/";
+            pwd+=*it;
+//            cout<<"/"<<*it;
+        }
+        emit sendGuiRoute(QString::fromStdString(pwd));
+        emit sendGuiFileName(QString::fromStdString(ls()));
+//        cout<<pwd<<endl;
+        //cout<<"$ ";
+    }else{
+        QMessageBox::information(this, QString::fromLocal8Bit("警告"),QString::fromLocal8Bit("用户名密码错误"));
+        ui->lineEdit_2->clear();
+        ui->lineEdit->clear();
+    }
+//    QMessageBox::information(this, QString::fromLocal8Bit("警告"),psw);
+
 }
 
 void MainWindow::on_commandLinkButton_clicked()
@@ -342,4 +370,18 @@ void MainWindow::receiveUserAddContent(QString n, QString p)
 //        emit sendUserAddStatus(false);
 //    }
 
+}
+
+void MainWindow::receiveGuiEnterFileName(QString n)
+{
+    cd(n.toStdString());
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
 }

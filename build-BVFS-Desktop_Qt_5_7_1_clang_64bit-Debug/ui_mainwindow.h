@@ -77,6 +77,14 @@ public:
         font.setPointSize(24);
         label_3->setFont(font);
         MainWindow->setCentralWidget(centralWidget);
+        lineEdit->raise();
+        label->raise();
+        label_2->raise();
+        commandLinkButton->raise();
+        pushButton->raise();
+        pushButton_2->raise();
+        label_3->raise();
+        lineEdit_2->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 835, 22));
@@ -87,6 +95,10 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+        QWidget::setTabOrder(lineEdit_2, lineEdit);
+        QWidget::setTabOrder(lineEdit, pushButton_2);
+        QWidget::setTabOrder(pushButton_2, pushButton);
+        QWidget::setTabOrder(pushButton, commandLinkButton);
 
         retranslateUi(MainWindow);
 

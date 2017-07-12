@@ -90,6 +90,7 @@ private slots:
     void receiveOrder(QString);
     void receiveVimContent(QString,QString);
     void receiveUserAddContent(QString,QString);
+    void receiveGuiEnterFileName(QString);
 
 signals:
     void showGUI();
@@ -108,6 +109,8 @@ signals:
     void sendLogoutAction();
     void sendUserAddAction();
     void sendUserAddStatus(bool);
+    void sendGuiRoute(QString);
+    void sendGuiFileName(QString);
 private:
     Ui::MainWindow *ui;
 

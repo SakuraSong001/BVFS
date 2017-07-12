@@ -124,7 +124,7 @@ string ls() {
             }
         }
     }
-    lsReturn+="\n";
+//    lsReturn+="\n";
     return lsReturn;
 }
 string ll() {

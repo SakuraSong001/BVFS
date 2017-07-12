@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
 //    g.show();
     i.setWindowTitle("iNode Structure Table");
     i.show();
-    c.setWindowTitle("Leeeeo@LeeeeoLius-MacBook-Pro:~/Code/BVFS");
+//    g.show();
+//    c.setWindowTitle("Leeeeo@LeeeeoLius-MacBook-Pro:~/Code/BVFS");
     w.show();
-//    c.show();
     QObject::connect(&w,SIGNAL(showGUI()),&g,SLOT(receiveShow()));
     QObject::connect(&w,SIGNAL(showCLI()),&c,SLOT(receiveShow()));
     QObject::connect(&c,SIGNAL(sendLoginInfo(QString,QString)),&w,SLOT(receiveLoginInfo(QString,QString)));
@@ -43,9 +43,11 @@ int main(int argc, char *argv[])
     QObject::connect(&w,SIGNAL(sendUserAddAction()),&c,SLOT(receiveUserAddAction()));
     QObject::connect(&c,SIGNAL(sendUserAddContent(QString,QString)),&w,SLOT(receiveUserAddContent(QString,QString)));
     QObject::connect(&w,SIGNAL(sendUserAddStatus(bool)),&c,SLOT(receiveUserAddStatus(bool)));
-//    title();
 
-//    run();
+    QObject::connect(&w,SIGNAL(sendGuiRoute(QString)),&g,SLOT(receiveRoute(QString)));
+    QObject::connect(&w,SIGNAL(sendGuiFileName(QString)),&g,SLOT(receiveFileName(QString)));
+    QObject::connect(&g,SIGNAL(sendEnterFileName(QString)),&w,SLOT(receiveGuiEnterFileName(QString)));
+//    QObject::connect()
 
     return a.exec();
 }
