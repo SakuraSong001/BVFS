@@ -385,3 +385,83 @@ void MainWindow::receiveGuiEnterFileName(QString n)
     emit sendGuiRoute(QString::fromStdString(pwd));
     emit sendGuiFileName(QString::fromStdString(ls()));
 }
+
+void MainWindow::receiveGuiReturnAction()
+{
+    QString r="..";
+    emit sendGuiFrontName(QString::fromStdString(*(PWD.end()-1)));
+    cd(r.toStdString());
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+
+
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}
+
+void MainWindow::receiveGuiEditContent(QString file, QString content)
+{
+    string f=file.toStdString();
+    string c=content.toStdString();
+    vim(f,c);
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}
+
+void MainWindow::receiveGuiEditDisplay(QString n)
+{
+    emit sendGuiEditDisplayContent(QString::fromStdString(cat(n.toStdString())));
+}
+
+void MainWindow::receiveGuiShowDirectories()
+{
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}
+
+void MainWindow::receiveGuiNewDirectory(QString r)
+{
+    mkdir(r.toStdString());
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}
+
+void MainWindow::receiveGuiNewFile(QString r)
+{
+    touch(r.toStdString());
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}

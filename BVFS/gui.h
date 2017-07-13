@@ -23,8 +23,11 @@ private slots:
     void receiveRoute(QString);
     void receiveFileName(QString);
     void receiveEnterFile(int);
+    void receiveFrontName(QString);
 //点击事件
     void on_back_clicked();
+    void newDirectory();
+    void newFile();
     void ADDChange()
     {
         qDebug()<<"XML Item Pressed.";
@@ -36,13 +39,21 @@ private slots:
 
 
     void on_file2_clicked();
+    void on_forward_clicked();
+
 signals:
     void sendEnterFileName(QString);
+    void sendReturnAction();
+    void sendFileEditAction(QString);
+    void sendNewDirectoryAction(QString);
+    void sendNewFileAction(QString);
 
 private:
     Ui::GUI *ui;
     QAction* Act_Maxsize;
     QAction* Act_Normal;
+    QAction* NewDirectory;
+    QAction* NewFile;
 
 protected:
     bool eventFilter(QObject *target, QEvent *e);

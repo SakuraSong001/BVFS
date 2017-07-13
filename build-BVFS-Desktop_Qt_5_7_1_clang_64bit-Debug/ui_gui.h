@@ -34,7 +34,6 @@ public:
     QPushButton *edit;
     QPushButton *new_2;
     QPushButton *forward;
-    QPushButton *file1;
     QPushButton *home;
     QPushButton *icon;
     QPushButton *list;
@@ -84,12 +83,6 @@ public:
         forward->setStyleSheet(QLatin1String("border-image: url(:/new/prefix1/forward.png);\n"
 "border-image: url(:/new/prefix1/forward1.png);\n"
 "border-image: url(:/new/prefix1/forward2.png);"));
-        file1 = new QPushButton(centralwidget);
-        file1->setObjectName(QStringLiteral("file1"));
-        file1->setGeometry(QRect(30, 80, 31, 23));
-        file1->setStyleSheet(QLatin1String("border-image: url(:/new/prefix1/file1.png);\n"
-"border-image: url(:/new/prefix1/file11.png);\n"
-"border-image: url(:/new/prefix1/file12.png);"));
         home = new QPushButton(centralwidget);
         home->setObjectName(QStringLiteral("home"));
         home->setGeometry(QRect(30, 140, 31, 23));
@@ -158,7 +151,6 @@ public:
         edit->setText(QString());
         new_2->setText(QString());
         forward->setText(QString());
-        file1->setText(QString());
         home->setText(QString());
         icon->setText(QString());
         list->setText(QString());

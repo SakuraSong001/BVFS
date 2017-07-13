@@ -26,7 +26,8 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     gui.cpp \
     cli.cpp \
-    ini.cpp
+    ini.cpp \
+    editor.cpp
 
 HEADERS  += mainwindow.h \
     directory.h \
@@ -42,12 +43,14 @@ HEADERS  += mainwindow.h \
     gui.h \
     cli.h \
     ini.h \
-    main.h
+    main.h \
+    editor.h
 
 FORMS    += mainwindow.ui \
     gui.ui \
     cli.ui \
-    ini.ui
+    ini.ui \
+    editor.ui
 
 RESOURCES += \
     picture.qrc

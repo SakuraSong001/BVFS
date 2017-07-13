@@ -92,7 +92,8 @@ void cd (string dir) {
 }
 void cd_back() {
     if(PWD.size()>1) {
-        PWD.erase(PWD.end());
+        PWD.pop_back();
+//        PWD.erase(PWD.end());
     }
 }
 string pwd() {

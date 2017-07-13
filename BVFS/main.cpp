@@ -3,6 +3,7 @@
 #include "gui.h"
 #include "cli.h"
 #include "ini.h"
+#include "editor.h"
 #include <QApplication>
 #include <iostream>
 using namespace std;
@@ -15,9 +16,10 @@ int main(int argc, char *argv[])
     GUI g;
     CLI c;
     iNI i;
+    Editor e;
 //    g.show();
     i.setWindowTitle("iNode Structure Table");
-    i.show();
+//    i.show();
 //    g.show();
 //    c.setWindowTitle("Leeeeo@LeeeeoLius-MacBook-Pro:~/Code/BVFS");
     w.show();
@@ -47,6 +49,16 @@ int main(int argc, char *argv[])
     QObject::connect(&w,SIGNAL(sendGuiRoute(QString)),&g,SLOT(receiveRoute(QString)));
     QObject::connect(&w,SIGNAL(sendGuiFileName(QString)),&g,SLOT(receiveFileName(QString)));
     QObject::connect(&g,SIGNAL(sendEnterFileName(QString)),&w,SLOT(receiveGuiEnterFileName(QString)));
+    QObject::connect(&g,SIGNAL(sendReturnAction()),&w,SLOT(receiveGuiReturnAction()));
+    QObject::connect(&w,SIGNAL(sendGuiFrontName(QString)),&g,SLOT(receiveFrontName(QString)));
+
+    QObject::connect(&g,SIGNAL(sendFileEditAction(QString)),&e,SLOT(showEditorUI(QString)));
+    QObject::connect(&e,SIGNAL(sendEditFileNameContent(QString,QString)),&w,SLOT(receiveGuiEditContent(QString,QString)));
+    QObject::connect(&e,SIGNAL(sendEditDisplayContent(QString)),&w,SLOT(receiveGuiEditDisplay(QString)));
+    QObject::connect(&w,SIGNAL(sendGuiEditDisplayContent(QString)),&e,SLOT(receiveDisplayContent(QString)));
+    QObject::connect(&e,SIGNAL(showDirectories()),&w,SLOT(receiveGuiShowDirectories()));
+    QObject::connect(&g,SIGNAL(sendNewDirectoryAction(QString)),&w,SLOT(receiveGuiNewDirectory(QString)));
+    QObject::connect(&g,SIGNAL(sendNewFileAction(QString)),&w,SLOT(receiveGuiNewFile(QString)));
 //    QObject::connect()
 
     return a.exec();

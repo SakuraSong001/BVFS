@@ -52,21 +52,25 @@ SOURCES       = ../BVFS/main.cpp \
 		../BVFS/mainwindow.cpp \
 		../BVFS/gui.cpp \
 		../BVFS/cli.cpp \
-		../BVFS/ini.cpp qrc_picture.cpp \
+		../BVFS/ini.cpp \
+		../BVFS/editor.cpp qrc_picture.cpp \
 		moc_mainwindow.cpp \
 		moc_gui.cpp \
 		moc_cli.cpp \
-		moc_ini.cpp
+		moc_ini.cpp \
+		moc_editor.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		gui.o \
 		cli.o \
 		ini.o \
+		editor.o \
 		qrc_picture.o \
 		moc_mainwindow.o \
 		moc_gui.o \
 		moc_cli.o \
-		moc_ini.o
+		moc_ini.o \
+		moc_editor.o
 DIST          = ../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.7/clang_64/mkspecs/qdevice.pri \
 		../../Qt/5.7/clang_64/mkspecs/features/device_config.prf \
@@ -222,11 +226,13 @@ DIST          = ../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../BVFS/gui.h \
 		../BVFS/cli.h \
 		../BVFS/ini.h \
-		../BVFS/main.h ../BVFS/main.cpp \
+		../BVFS/main.h \
+		../BVFS/editor.h ../BVFS/main.cpp \
 		../BVFS/mainwindow.cpp \
 		../BVFS/gui.cpp \
 		../BVFS/cli.cpp \
-		../BVFS/ini.cpp
+		../BVFS/ini.cpp \
+		../BVFS/editor.cpp
 QMAKE_TARGET  = BVFS
 DESTDIR       = 
 TARGET        = BVFS.app/Contents/MacOS/BVFS
@@ -235,7 +241,7 @@ TARGET        = BVFS.app/Contents/MacOS/BVFS
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h ui_editor.h $(OBJECTS)  
 	@test -d BVFS.app/Contents/MacOS/ || mkdir -p BVFS.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -562,9 +568,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../BVFS/picture.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h ../BVFS/gui.h ../BVFS/cli.h ../BVFS/ini.h ../BVFS/main.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../BVFS/main.cpp ../BVFS/mainwindow.cpp ../BVFS/gui.cpp ../BVFS/cli.cpp ../BVFS/ini.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../BVFS/mainwindow.ui ../BVFS/gui.ui ../BVFS/cli.ui ../BVFS/ini.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/mainwindow.h ../BVFS/directory.h ../BVFS/file.h ../BVFS/filesystem.h ../BVFS/format.h ../BVFS/freeblocklink.h ../BVFS/help.h ../BVFS/login.h ../BVFS/register.h ../BVFS/run.h ../BVFS/stacki.h ../BVFS/gui.h ../BVFS/cli.h ../BVFS/ini.h ../BVFS/main.h ../BVFS/editor.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/main.cpp ../BVFS/mainwindow.cpp ../BVFS/gui.cpp ../BVFS/cli.cpp ../BVFS/ini.cpp ../BVFS/editor.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../BVFS/mainwindow.ui ../BVFS/gui.ui ../BVFS/cli.ui ../BVFS/ini.ui ../BVFS/editor.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -625,9 +631,9 @@ qrc_picture.cpp: ../BVFS/picture.qrc \
 		../BVFS/file12.png
 	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/rcc -name picture ../BVFS/picture.qrc -o qrc_picture.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp moc_editor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_gui.cpp moc_cli.cpp moc_ini.cpp moc_editor.cpp
 moc_mainwindow.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../BVFS/mainwindow.h \
@@ -636,6 +642,10 @@ moc_mainwindow.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainW
 
 moc_gui.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QAction \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../BVFS/gui.h \
 		../../Qt/5.7/clang_64/bin/moc
 	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/liuyuanxing/Code/BVFS/BVFS -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib ../BVFS/gui.h -o moc_gui.cpp
@@ -648,15 +658,22 @@ moc_cli.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 
 moc_ini.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../BVFS/mainwindow.h \
 		../BVFS/ini.h \
 		../../Qt/5.7/clang_64/bin/moc
 	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/liuyuanxing/Code/BVFS/BVFS -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib ../BVFS/ini.h -o moc_ini.cpp
 
+moc_editor.cpp: ../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../BVFS/editor.h \
+		../../Qt/5.7/clang_64/bin/moc
+	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/liuyuanxing/Code/BVFS/BVFS -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.1.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/liuyuanxing/Code/Qt/5.7/clang_64/lib ../BVFS/editor.h -o moc_editor.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h
+compiler_uic_make_all: ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h ui_editor.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h
+	-$(DEL_FILE) ui_mainwindow.h ui_gui.h ui_cli.h ui_ini.h ui_editor.h
 ui_mainwindow.h: ../BVFS/mainwindow.ui \
 		../../Qt/5.7/clang_64/bin/uic
 	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/uic ../BVFS/mainwindow.ui -o ui_mainwindow.h
@@ -672,6 +689,10 @@ ui_cli.h: ../BVFS/cli.ui \
 ui_ini.h: ../BVFS/ini.ui \
 		../../Qt/5.7/clang_64/bin/uic
 	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/uic ../BVFS/ini.ui -o ui_ini.h
+
+ui_editor.h: ../BVFS/editor.ui \
+		../../Qt/5.7/clang_64/bin/uic
+	/Users/liuyuanxing/Code/Qt/5.7/clang_64/bin/uic ../BVFS/editor.ui -o ui_editor.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -690,8 +711,13 @@ main.o: ../BVFS/main.cpp ../BVFS/main.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../BVFS/gui.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QAction \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../BVFS/cli.h \
 		../BVFS/ini.h \
+		../BVFS/editor.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../BVFS/main.cpp
@@ -701,6 +727,10 @@ mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_mainwindow.h \
 		../BVFS/gui.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QAction \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../BVFS/run.h \
 		../BVFS/filesystem.h \
 		../BVFS/file.h \
@@ -718,7 +748,19 @@ mainwindow.o: ../BVFS/mainwindow.cpp ../BVFS/mainwindow.h \
 gui.o: ../BVFS/gui.cpp ../BVFS/gui.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_gui.h
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QAction \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		ui_gui.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMenu \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \
+		../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QCursor \
+		../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcursor.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gui.o ../BVFS/gui.cpp
 
 cli.o: ../BVFS/cli.cpp ../BVFS/cli.h \
@@ -735,8 +777,15 @@ cli.o: ../BVFS/cli.cpp ../BVFS/cli.h \
 ini.o: ../BVFS/ini.cpp ../BVFS/ini.h \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../BVFS/mainwindow.h \
 		ui_ini.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ini.o ../BVFS/ini.cpp
+
+editor.o: ../BVFS/editor.cpp ../BVFS/editor.h \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_editor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o editor.o ../BVFS/editor.cpp
 
 qrc_picture.o: qrc_picture.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_picture.o qrc_picture.cpp
@@ -752,6 +801,9 @@ moc_cli.o: moc_cli.cpp
 
 moc_ini.o: moc_ini.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ini.o moc_ini.cpp
+
+moc_editor.o: moc_editor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_editor.o moc_editor.cpp
 
 ####### Install
 

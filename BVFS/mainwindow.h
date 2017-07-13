@@ -91,6 +91,12 @@ private slots:
     void receiveVimContent(QString,QString);
     void receiveUserAddContent(QString,QString);
     void receiveGuiEnterFileName(QString);
+    void receiveGuiReturnAction();
+    void receiveGuiEditContent(QString,QString);
+    void receiveGuiEditDisplay(QString);
+    void receiveGuiShowDirectories();
+    void receiveGuiNewDirectory(QString);
+    void receiveGuiNewFile(QString);
 
 signals:
     void showGUI();
@@ -111,6 +117,9 @@ signals:
     void sendUserAddStatus(bool);
     void sendGuiRoute(QString);
     void sendGuiFileName(QString);
+    void sendGuiFrontName(QString);
+    void sendGuiEditDisplayContent(QString);
+
 private:
     Ui::MainWindow *ui;
 
