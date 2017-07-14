@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include "main.h"
 #include <QTime>
+#include <QDebug>
 using namespace std;
 //QString cliHistory;
 int tabCount=1;
@@ -135,6 +136,7 @@ void CLI::on_lineEdit_returnPressed()
         QString order=ui->lineEdit->text();
         order=order.section('$',1,1);
         configEditor->appendPlainText(ui->lineEdit->text());
+        qDebug()<<order;
         emit sendOrder(order);
 
         cmdTime=QTime::currentTime().toString("hh:mm:ss");

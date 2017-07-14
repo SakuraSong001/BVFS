@@ -24,8 +24,8 @@ void init() //初始化命令
 	{
 		format();
 		load();
-		char tmp[2];
-		gets(tmp);
+//		char tmp[2];
+//		gets(tmp);
 	}
 	else
 	{
