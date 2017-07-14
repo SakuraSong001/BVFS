@@ -24,6 +24,12 @@ CLI::CLI(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CLI)
 {
+
+    configEditor = new CodeEditor();
+      //新加
+           configEditor->setMode(EDIT);
+       MyHighLighter *highlighter = new MyHighLighter(configEditor->document
+   ());
     QPalette palette(this->palette());
     palette.setColor(QPalette::Background, Qt::lightGray);
     this->setPalette(palette);
@@ -31,9 +37,15 @@ CLI::CLI(QWidget *parent) :
     ui->setupUi(this);
 //    ui->textEdit->append(cliHistory);
 //    ui->plainTextEdit->appendHtml(cliHistory+"");
-    ui->textEdit->moveCursor(QTextCursor::End);
-    ui->textEdit->append("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
+    configEditor->moveCursor(QTextCursor::End);
+//    ui->textEdit->append("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
     emit sendRefreshAction();
+
+
+       configEditor->appendPlainText("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
+       configEditor->moveCursor(QTextCursor::End);
+
+    ui->gridLayout->addWidget(configEditor);
 }
 
 CLI::~CLI()
@@ -59,7 +71,9 @@ void CLI::on_lineEdit_returnPressed()
             QString order=ui->lineEdit->text();
             order=order.section('$',1,1);
             userRegist=order;
-            ui->textEdit->append(userRegist+"'s password:");
+            configEditor->setMode(EDIT);
+            MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+            configEditor->appendPlainText(userRegist+"'s password:");
             cmdTime=QTime::currentTime().toString("hh:mm:ss");
     //        ui->textEdit->append(ui->lineEdit->text());
             this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
@@ -84,8 +98,10 @@ void CLI::on_lineEdit_returnPressed()
     }else if(userCurrent.count()==0)
     {
 
+        configEditor->setMode(EDIT);
+        MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
         userCurrent=ui->lineEdit->text();
-        ui->textEdit->append(userCurrent+"'s Password:");
+        configEditor->appendPlainText(userCurrent+"'s Password:");
         ui->lineEdit->clear();
     }
     else if(userCurrent.count()!=0&&pswCurrent.count()==0)
@@ -99,18 +115,26 @@ void CLI::on_lineEdit_returnPressed()
 //        ui->lineEdit->setText(front);
     }else if(ui->lineEdit->text()==":wq")
     {
-        emit sendVimContent(file,ui->textEdit->toPlainText());
-        ui->textEdit->clear();
-        ui->textEdit->append(his);
+
+
+            configEditor->setMode(EDIT);
+             MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+        emit sendVimContent(file,configEditor->toPlainText());
+             configEditor->clear();
+             configEditor->appendPlainText(his);
         cmdTime=QTime::currentTime().toString("hh:mm:ss");
 //        ui->textEdit->append(ui->lineEdit->text());
         this->setWindowTitle(userCurrent+"@LeeeeoLius-MacBook-Pro:"+route);
         front="# "+userCurrent+"@ LeeeeoLius-MacBook-Pro in "+route+"["+cmdTime+"]$";
         ui->lineEdit->setText(front);
     }else if(userStatus){
+
+
+               configEditor->setMode(EDIT);
+           MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
         QString order=ui->lineEdit->text();
         order=order.section('$',1,1);
-        ui->textEdit->append(ui->lineEdit->text());
+        configEditor->appendPlainText(ui->lineEdit->text());
         emit sendOrder(order);
 
         cmdTime=QTime::currentTime().toString("hh:mm:ss");
@@ -182,7 +206,10 @@ void CLI::receiveLoginStatus(bool status)
     userStatus=status;
     if(status)
     {
-        ui->textEdit->append(userCurrent+" login sucessfully!");
+
+               configEditor->setMode(EDIT);
+           MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+        configEditor->appendPlainText(userCurrent+" login sucessfully!");
 //        ui->textEdit->append("\n");
 //        cmdTime=QTime::currentTime().toString("hh:mm:ss");
 //        ui->textEdit->append(ui->lineEdit->text());
@@ -191,10 +218,13 @@ void CLI::receiveLoginStatus(bool status)
 //        ui->lineEdit->setText(front);
     }else
     {
-        ui->textEdit->append("\nWrong Password!Please try again!\n");
+
+               configEditor->setMode(EDIT);
+           MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+        configEditor->appendPlainText("\nWrong Password!Please try again!\n");
         userCurrent.clear();
         pswCurrent.clear();
-        ui->textEdit->append("login:");
+        configEditor->appendPlainText("login:");
         ui->lineEdit->clear();
     }
 //    emit sendRefreshAction();
@@ -213,54 +243,79 @@ void CLI::receiveRoute(QString r)
 
 void CLI::receiveCatReturn(QString r)
 {
-    ui->textEdit->append(r);
+
+           configEditor->setMode(EDIT);
+       MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+
+    configEditor->appendPlainText(r);
     emit sendRefreshAction();
 }
 
 void CLI::receiveLsReturn(QString r)
 {
-    ui->textEdit->append(r);
+
+           configEditor->setMode(EDIT);
+       MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+     configEditor->appendPlainText(r);
     emit sendRefreshAction();
 }
 
 void CLI::receiveLlReturn(QString r)
 {
-    ui->textEdit->append(r);
+
+           configEditor->setMode(EDIT);
+       MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+     configEditor->appendPlainText(r);
     emit sendRefreshAction();
 }
 
 void CLI::receivePwdReturn(QString r)
 {
-    ui->textEdit->append(r);
+
+    configEditor->setMode(EDIT);
+    MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+    configEditor->appendPlainText(r);
     emit sendRefreshAction();
 }
 
 void CLI::receiveVimAction(QString f)
 {
+
+           configEditor->setMode(EDIT);
+       MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
     file=f;
-    his=ui->textEdit->toPlainText();
-    ui->textEdit->clear();
+    his=configEditor->toPlainText();
+    configEditor->clear();
 //    ui->lineEdit->clear();
-    ui->textEdit->setReadOnly(false);
+   configEditor->setReadOnly(false);
     emit sendRefreshAction();
 //    ui->lineEdit->clear();
 }
 
 void CLI::receiveHelpReturn(QString r)
 {
-    ui->textEdit->append(r);
+    configEditor->setMode(EDIT);
+    MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+    configEditor->appendPlainText(r);
 }
 
 void CLI::receiveClsAction()
 {
-    ui->textEdit->clear();
+    configEditor->setMode(EDIT);
+    MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+//    configEditor->appendPlainText(r);
+    configEditor->clear();
+//    ui->textEdit->clear();
 }
 
 void CLI::receiveLogoutAction()
 {
-    ui->textEdit->clear();
-    ui->textEdit->moveCursor(QTextCursor::End);
-    ui->textEdit->append("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
+    configEditor->setMode(EDIT);
+    MyHighLighter *highlighter = new MyHighLighter(configEditor->document());
+//    configEditor->appendPlainText(r);
+    configEditor->clear();
+    configEditor->moveCursor(QTextCursor::End);
+    configEditor->appendPlainText("Welcome to BVFS comand line interface!\n(C) Copyrights by BV533 2017.\nlogin:");
     userCurrent.clear();
     pswCurrent.clear();
     ui->lineEdit->clear();
@@ -270,11 +325,11 @@ void CLI::receiveUserAddAction()
 {
     if(userCurrent!="root")
     {
-        ui->textEdit->append("Permission denied");
+        configEditor->appendPlainText("Permission denied");
     }
     else
     {
-        ui->textEdit->append("uesrname:");
+        configEditor->appendPlainText("uesrname:");
         registMark=true;
     }
 }
@@ -283,9 +338,9 @@ void CLI::receiveUserAddStatus(bool r)
 {
     if(r)
     {
-        ui->textEdit->append("Register Successfully!");
+        configEditor->appendPlainText("Register Successfully!");
     }else
     {
-        ui->textEdit->append("Failed!");
+        configEditor->appendPlainText("Failed!");
     }
 }

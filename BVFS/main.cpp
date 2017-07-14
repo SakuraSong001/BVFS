@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
     QObject::connect(&g,SIGNAL(sendNewDirectoryAction(QString)),&w,SLOT(receiveGuiNewDirectory(QString)));
     QObject::connect(&g,SIGNAL(sendNewFileAction(QString)),&w,SLOT(receiveGuiNewFile(QString)));
     QObject::connect(&g,SIGNAL(sendRenameAction(QString,QString)),&w,SLOT(receiveGuiRenameAction(QString,QString)));
+    QObject::connect(&g,SIGNAL(sendDeleteAction(QString)),&w,SLOT(receiveGuiDeleteAction(QString)));
 //    QObject::connect()
 
     return a.exec();

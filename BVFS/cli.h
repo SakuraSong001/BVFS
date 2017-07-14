@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 //#include "login.h"
+#include "codeeditor.h"      //
+#include "myhighlighter.h"   //
+#include "typedef.h"         //
 
 namespace Ui {
 class CLI;
@@ -40,6 +43,7 @@ signals:
     void sendUserAddContent(QString,QString);
 private:
     Ui::CLI *ui;
+    CodeEditor *configEditor;    //
 };
 
 #endif // CLI_H

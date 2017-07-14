@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     gui.cpp \
     cli.cpp \
     ini.cpp \
-    editor.cpp
+    editor.cpp \
+    myhighlighter.cpp \
+    codeeditor.cpp
 
 HEADERS  += mainwindow.h \
     directory.h \
@@ -44,7 +46,10 @@ HEADERS  += mainwindow.h \
     cli.h \
     ini.h \
     main.h \
-    editor.h
+    editor.h \
+    myhighlighter.h \
+    codeeditor.h \
+    typedef.h
 
 FORMS    += mainwindow.ui \
     gui.ui \
