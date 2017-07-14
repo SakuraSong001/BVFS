@@ -18,8 +18,8 @@ string help()
     string helpReturn="";
     helpReturn+="system:";
     cout<<"system:"<<endl;
-    helpReturn+=orderItem("login", "login in as a user");
-    helpReturn+=orderItem("logout", "logout and save the status");
+    helpReturn+=orderItem("login", "login in as a user");     //ok
+    helpReturn+=orderItem("logout", "logout and save the status"); //ok
     helpReturn+=orderItem("register", "register a new user");
     helpReturn+=orderItem("format", "format the disk fast");
     helpReturn+=orderItem("help", "show order list");

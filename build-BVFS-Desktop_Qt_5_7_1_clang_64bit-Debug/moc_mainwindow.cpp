@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[40];
-    char stringdata0[678];
+    QByteArrayData data[41];
+    char stringdata0[701];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -68,7 +68,8 @@ QT_MOC_LITERAL(35, 567, 21), // "receiveGuiEditContent"
 QT_MOC_LITERAL(36, 589, 21), // "receiveGuiEditDisplay"
 QT_MOC_LITERAL(37, 611, 25), // "receiveGuiShowDirectories"
 QT_MOC_LITERAL(38, 637, 22), // "receiveGuiNewDirectory"
-QT_MOC_LITERAL(39, 660, 17) // "receiveGuiNewFile"
+QT_MOC_LITERAL(39, 660, 17), // "receiveGuiNewFile"
+QT_MOC_LITERAL(40, 678, 22) // "receiveGuiRenameAction"
 
     },
     "MainWindow\0showGUI\0\0showCLI\0sendLoginStatus\0"
@@ -89,7 +90,8 @@ QT_MOC_LITERAL(39, 660, 17) // "receiveGuiNewFile"
     "receiveGuiEnterFileName\0receiveGuiReturnAction\0"
     "receiveGuiEditContent\0receiveGuiEditDisplay\0"
     "receiveGuiShowDirectories\0"
-    "receiveGuiNewDirectory\0receiveGuiNewFile"
+    "receiveGuiNewDirectory\0receiveGuiNewFile\0"
+    "receiveGuiRenameAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -99,7 +101,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      35,   14, // methods
+      36,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -107,43 +109,44 @@ static const uint qt_meta_data_MainWindow[] = {
       20,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  189,    2, 0x06 /* Public */,
-       3,    0,  190,    2, 0x06 /* Public */,
-       4,    1,  191,    2, 0x06 /* Public */,
-       5,    3,  194,    2, 0x06 /* Public */,
-       9,    1,  201,    2, 0x06 /* Public */,
-      10,    1,  204,    2, 0x06 /* Public */,
-      11,    1,  207,    2, 0x06 /* Public */,
-      12,    1,  210,    2, 0x06 /* Public */,
-      13,    1,  213,    2, 0x06 /* Public */,
-      14,    1,  216,    2, 0x06 /* Public */,
-      15,    0,  219,    2, 0x06 /* Public */,
-      16,    1,  220,    2, 0x06 /* Public */,
-      17,    0,  223,    2, 0x06 /* Public */,
-      18,    0,  224,    2, 0x06 /* Public */,
-      19,    0,  225,    2, 0x06 /* Public */,
-      20,    1,  226,    2, 0x06 /* Public */,
-      21,    1,  229,    2, 0x06 /* Public */,
-      22,    1,  232,    2, 0x06 /* Public */,
-      23,    1,  235,    2, 0x06 /* Public */,
-      24,    1,  238,    2, 0x06 /* Public */,
+       1,    0,  194,    2, 0x06 /* Public */,
+       3,    0,  195,    2, 0x06 /* Public */,
+       4,    1,  196,    2, 0x06 /* Public */,
+       5,    3,  199,    2, 0x06 /* Public */,
+       9,    1,  206,    2, 0x06 /* Public */,
+      10,    1,  209,    2, 0x06 /* Public */,
+      11,    1,  212,    2, 0x06 /* Public */,
+      12,    1,  215,    2, 0x06 /* Public */,
+      13,    1,  218,    2, 0x06 /* Public */,
+      14,    1,  221,    2, 0x06 /* Public */,
+      15,    0,  224,    2, 0x06 /* Public */,
+      16,    1,  225,    2, 0x06 /* Public */,
+      17,    0,  228,    2, 0x06 /* Public */,
+      18,    0,  229,    2, 0x06 /* Public */,
+      19,    0,  230,    2, 0x06 /* Public */,
+      20,    1,  231,    2, 0x06 /* Public */,
+      21,    1,  234,    2, 0x06 /* Public */,
+      22,    1,  237,    2, 0x06 /* Public */,
+      23,    1,  240,    2, 0x06 /* Public */,
+      24,    1,  243,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      25,    0,  241,    2, 0x08 /* Private */,
-      26,    0,  242,    2, 0x08 /* Private */,
-      27,    0,  243,    2, 0x08 /* Private */,
-      28,    2,  244,    2, 0x08 /* Private */,
-      29,    1,  249,    2, 0x08 /* Private */,
-      30,    1,  252,    2, 0x08 /* Private */,
-      31,    2,  255,    2, 0x08 /* Private */,
-      32,    2,  260,    2, 0x08 /* Private */,
-      33,    1,  265,    2, 0x08 /* Private */,
-      34,    0,  268,    2, 0x08 /* Private */,
-      35,    2,  269,    2, 0x08 /* Private */,
-      36,    1,  274,    2, 0x08 /* Private */,
-      37,    0,  277,    2, 0x08 /* Private */,
-      38,    1,  278,    2, 0x08 /* Private */,
-      39,    1,  281,    2, 0x08 /* Private */,
+      25,    0,  246,    2, 0x08 /* Private */,
+      26,    0,  247,    2, 0x08 /* Private */,
+      27,    0,  248,    2, 0x08 /* Private */,
+      28,    2,  249,    2, 0x08 /* Private */,
+      29,    1,  254,    2, 0x08 /* Private */,
+      30,    1,  257,    2, 0x08 /* Private */,
+      31,    2,  260,    2, 0x08 /* Private */,
+      32,    2,  265,    2, 0x08 /* Private */,
+      33,    1,  270,    2, 0x08 /* Private */,
+      34,    0,  273,    2, 0x08 /* Private */,
+      35,    2,  274,    2, 0x08 /* Private */,
+      36,    1,  279,    2, 0x08 /* Private */,
+      37,    0,  282,    2, 0x08 /* Private */,
+      38,    1,  283,    2, 0x08 /* Private */,
+      39,    1,  286,    2, 0x08 /* Private */,
+      40,    2,  289,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -183,6 +186,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    2,    2,
 
        0        // eod
 };
@@ -228,6 +232,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 32: _t->receiveGuiShowDirectories(); break;
         case 33: _t->receiveGuiNewDirectory((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 34: _t->receiveGuiNewFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 35: _t->receiveGuiRenameAction((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -401,13 +406,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 35)
+        if (_id < 36)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 35;
+        _id -= 36;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 35)
+        if (_id < 36)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 35;
+        _id -= 36;
     }
     return _id;
 }

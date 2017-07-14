@@ -52,5 +52,63 @@
     	- [ ] 文本编辑器
     - 命令行界面
     	- [x] 操作窗口多开
-	- [x] 操作窗口切换
-     	- [ ] 多用户同时在线操作[??]
+	   - [x] 操作窗口切换
+	   - [ ] 多用户同时在线操作[??]
+
+## 程序流程图
+```flow
+st=>start: 开始
+e=>end: 结束
+op=>operation: 选择界面
+select=>condition: 图形界面？
+g=>operation: 输入用户名密码登录
+check=>condition: 用户名密码是否正确
+login=>operation: 在命令行根据
+提示进行login
+check2=>condition: 判断login是否成功
+并提示
+o=>operation: 用户进行操作
+o2=>operation: 输入命令
+get=>operation: 通过槽函数和信号函数
+对操作类型进行划分
+send=>operation: 将参数和操作动作发送给主窗口
+send2=>operation: 将参数和操作动作发送给主窗口
+split=>operation: 提取命令中操作命令和目标文件夹
+receive=>operation: 主窗口接受参数执行对应命令
+receive2=>operation: 主窗口接受参数执行对应命令
+rt=>operation: 返回执行命令结果
+dis=>operation: 图形界面接收参数显示结果
+rt2=>operation: 返回执行命令结果
+dis2=>operation: 命令行界面接收参数显示结果
+close=>condition: 没有关闭窗口
+logout=>condition: 用户没有输入
+logout命令
+ex=>condition: 用户没有输入
+exit命令
+
+
+st->op->select
+select(yes)->g
+select(no)->login
+login->check2
+g->check
+check(yes)->o
+check(no)->g
+check2(no)->login
+check2(yes)->o2
+get->send
+
+o2->logout
+logout(yes)->ex
+logout(no)->login
+ex(yes)->split->send2
+ex(no)->e
+send2->receive2
+send->receive
+receive->rt->dis->o
+receive2->rt2->dis2->o2
+o->close(yes)->get->send
+close(no)->e
+```
+
+

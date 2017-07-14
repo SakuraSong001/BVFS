@@ -98,6 +98,7 @@ private slots:
     void receiveGuiNewDirectory(QString);
     void receiveGuiNewFile(QString);
     void receiveGuiRenameAction(QString,QString);
+    void receiveGuiDeleteAction(QString);
 
 signals:
     void showGUI();

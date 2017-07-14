@@ -479,3 +479,17 @@ void MainWindow::receiveGuiRenameAction(QString bn, QString an)
     emit sendGuiRoute(QString::fromStdString(pwd));
     emit sendGuiFileName(QString::fromStdString(ls()));
 }
+
+void MainWindow::receiveGuiDeleteAction(QString r)
+{
+    rmf(r.toStdString());
+    string pwd="";
+    vector<string>::iterator it;
+    for(it = PWD.begin();it!=PWD.end();it++) {
+        pwd+="/";
+        pwd+=*it;
+//            cout<<"/"<<*it;
+    }
+    emit sendGuiRoute(QString::fromStdString(pwd));
+    emit sendGuiFileName(QString::fromStdString(ls()));
+}

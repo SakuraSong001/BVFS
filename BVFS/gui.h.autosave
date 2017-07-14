@@ -58,6 +58,7 @@ signals:
     void sendNewDirectoryAction(QString);
     void sendNewFileAction(QString);
     void sendRenameAction(QString,QString);
+    void sendDeleteAction(QString);
 
 private:
     Ui::GUI *ui;

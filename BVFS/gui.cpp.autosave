@@ -323,6 +323,7 @@ void GUI::on_delete_2_clicked()
             if(rb == QMessageBox::Yes)
             {
                     qDebug()<<"确认删除";
+                    emit sendDeleteAction(text);
             }
         }else
         {
