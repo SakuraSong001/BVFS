@@ -156,14 +156,19 @@ close(no)->e
 ## i节点表结构
 
 ```c
-struct node      //i结点信息
-{
- int file_style;    //i结点 文件类型
- int file_length;   //i结点 文件长度
- int file_address[100];  //文件占用的物理块号。
- int limit;//打开读写权限，0表示能打开读写，1表示能打开读，2表示能打开写，3表示只能打开
- int file_UserId;
-} i_node[640];
+	int id;//节点号
+	int fileCount;//引用计数,表示有几个目录引用这个文件
+	int size;
+	//文件的大小,如果这是一个文件 这里表示文件所占的物理块个数，
+	//如果是一个目录，表示该目录下已经有的文件个数,用于判断是不是超过10个了
+	int fileMode;//文件类型,区分该i节点是文件(2)还是目录(1)还是用户, 1 means file, 0 means dir
+	int userId;   //使用者ID
+	int userRight[DIRECTORYITEMNUM];//使用者权限
+	tTime time;
+	int diskAddress[DISKADDRESSNUM];
+	//如果这个i结点是一个文件，Addr数组表示文件各个物理块位置编号
+	//如果是一个目录，表示目录的各个文件or文件夹的SFD的下标,所以一个目录下最大有NADDR个文件/目录
+	//如果是NADDR，那么Inode[0]存放的是用户，addr存放的是NADDR个用户的主文件夹的i结点的下标???????
 ```
 
 ## 算法的总体思想
