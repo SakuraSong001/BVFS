@@ -245,13 +245,23 @@ struct block//一个块占1KB
  int a;      //盘快是否被占用标志
  char content[1000];//快上每个字节存放的符号
 }memory[20449];
+/*
+*  superBlock
+*  size: 1024B
+*/
+struct superBlock {
+	int id;
+	int iNodeTotalNum;
+	int iNodeFreeNum;
+	//0-32
+	int dataBlockTotalNum;
+	int dataBlockFreeNum;
 
-/*超级块结构*/
-struct block_super
-{
- int n;      //空闲的盘快的个数
- int free[50];    //存放进入栈中的空闲块
-}super_block;
+	int iNodeFreeStack[INODEFREESTACKNUM];
+	int dataBlockFreeStack[DATABLOCKFREESTACKNUM];
+	//int superBlockFlag;
+
+};
 ```
 
 #### 算法
